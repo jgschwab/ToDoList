@@ -1,5 +1,7 @@
 package edu.ncsu.csc216.todolist.util;
 
+import edu.ncsu.csc216.todolist.model.Category;
+
 /**
  * Custom ArrayList for ToDoList
  * @author Justin Schwab
@@ -8,6 +10,21 @@ package edu.ncsu.csc216.todolist.util;
 public class ArrayList implements List {
 
 	private static final long serialVersionUID = 28592L;
+	/** The initial size of array. */
+	private static final int INIT_SIZE = 10;
+	/** The array of type Object */
+	private Object[] list;
+	/** The size of the ArrayList . */
+	private int size;
+	
+	/**
+	 * Constructs new Object array for this Array List, and sets size to 0
+	 */
+	public ArrayList(){
+		list = new Object[INIT_SIZE];
+		size = 0;
+	}
+	
 	
 	@Override
 	public int size() {

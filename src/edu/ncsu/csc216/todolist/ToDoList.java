@@ -121,7 +121,7 @@ public class ToDoList extends Observable implements Serializable, Observer {
 	 * Adds a Task to this ToDoList's List of TaskLists
 	 * @return WHAT DOES THIS EVEN RETURN???
 	 */
-	public int addTask(){
+	public int addTaskList(){
 		//TODO implement method
 		return 0;
 	}

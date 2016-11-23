@@ -1,6 +1,7 @@
 package edu.ncsu.csc216.todolist.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -11,22 +12,26 @@ import edu.ncsu.csc216.todolist.util.LinkedList;
  * @author Justin Schwab
  *
  */
-public class TaskList implements Tabular, Serializable, Observer {
+public class TaskList extends Observable implements Tabular, Serializable, Observer {
 
 	private static final long serialVersionUID = 98734509L;
-	
-	private LinkedList<Task> list;
+	private LinkedList list;
 	private String name;
 	private int nextTaskNum;
 	private String taskListID;
+	private Date start;
+	private Date start2;
 	
 	/**
-	 * Constructs TaskList 
+	 * Constructs TaskList; sets nextTaskNum to 1, and sets the fields with the parameter values. 
+	 * The behaviors defined for setName() apply when constructing a TaskList with the given parameters. 
+	 * taskListID should never be null or an empty string. Throws an IllegalArgumentException if any of 
+	 * the parameters are null or the empty string
 	 * @param name The name of the TaskList
 	 * @param id The ID of the TaskList
 	 */
 	public TaskList(String name, String id){
-		
+		//TODO implement
 	}
 	
 	/**
@@ -72,9 +77,14 @@ public class TaskList implements Tabular, Serializable, Observer {
 	
 	/**
 	 * Adds a Task to this TaskList
-	 * @return true if the Task was added
+	 * @param title The title of the Task to add
+	 * @param description The description of the Task to add
+	 * @param start The starting Date of the Task to add
+	 * @param due The due date of the Task to add
+	 * @param c The Category of the Task to add
+	 * @return true if the Task was added, false if not
 	 */
-	public boolean addTask(){
+	public boolean addTask(String title, String description, Date start, Date due, Category c){
 		//TODO implement method
 		return false;
 	}
@@ -147,11 +157,13 @@ public class TaskList implements Tabular, Serializable, Observer {
 	}
 	
 	/**
-	 * Updates
-	 * @param obs
-	 * @param obj
+	 * If a Task in the TaskList changes, the update() method is automatically called. 
+	 * TaskList should propagate the notification of the change to its Observers IF the 
+	 * Observable o is contained in the list of Tasks. 
+	 * The arg parameter is passed to notifyObservers().
 	 */
-	public void update(Observable obs, Object obj){
+	@Override
+	public void update(Observable obs, Object arg){
 		
 	}
 }
