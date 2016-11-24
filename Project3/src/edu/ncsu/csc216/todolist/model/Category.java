@@ -8,7 +8,7 @@ import java.util.Observable;
  * @author Justin Schwab
  *
  */
-public class Category extends Observable implements Comparable, Serializable {
+public class Category extends Observable implements Comparable<Object>, Serializable {
 	private static final long serialVersionUID = 459188L;
 	private String name;
 	private String description;

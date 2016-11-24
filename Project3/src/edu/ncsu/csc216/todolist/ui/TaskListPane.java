@@ -46,7 +46,8 @@ public class TaskListPane extends JScrollPane implements Observer {
 	}
 	
 	/**
-	 * I HAVE NO IDEA WHAT THIS DOES
+	 * Initializes the view by creating the JTable (that is wrapped in  JScrollPane)
+	 * and associating the JTable with the TaskTableModel.
 	 */
 	private void initView(){
 		
@@ -55,7 +56,7 @@ public class TaskListPane extends JScrollPane implements Observer {
 	/**
 	 * I HAVE NO IDEA WHAT THIS DOES EITHER
 	 */
-	public void clearSection(){
+	public void clearSelection(){
 		
 	}
 

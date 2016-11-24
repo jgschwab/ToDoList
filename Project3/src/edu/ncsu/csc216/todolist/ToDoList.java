@@ -11,7 +11,15 @@ import edu.ncsu.csc216.todolist.model.TaskList;
  * data structures that contain Task and Category objects and acts as the controller
  * between the model and the GUI presentation view.
  * 
+ * A ToDoList controls the value of a TaskList's id when adding a TaskList to the array 
+ * of TaskLists. Each TaskList id starts with "TL", and is appended with a number. 
+ * The number starts at 1 and is incremented after each TaskList is successfully added 
+ * to the array of TaskLists. This ensures that each TaskList has a unique id . The field 
+ * nextTaskListNum represents the value that will be appended to the next TaskList added 
+ * to the array of TaskLists.
+ * 
  * @author David Wright
+ * @author Justin Schwab
  * @version 1.0
  * 
  */
@@ -40,7 +48,13 @@ public class ToDoList extends Observable implements Serializable, Observer {
 	private int nextTaskListNum;
 	
 	/**
-	 * Constructor for ToDoList
+	 * Constructs the ToDoList by doing the following: 
+	 * 1. Constructs the tasks array with at least three elements.
+	 * 2. Constructs a TaskList called "New List" and adds it to element 0 of the tasks array. 
+	 * The ToDoList instance should be an Observer of the TaskList.
+	 * 3. Constructs a new CategoryList. The ToDoList instance should be an 
+	 * Observer of the CategoryList.
+	 * 4. Changed is set to false.
 	 */
 	public ToDoList(){
 		
@@ -72,7 +86,8 @@ public class ToDoList extends Observable implements Serializable, Observer {
 	}
 	
 	/**
-	 * Sets the file name of this ToDoList
+	 * If the filename parameter is null or the empty string an IllegalArgumentException is thrown. 
+	 * Otherwise, the filename field is set.
 	 * @param filename the name of the file to use
 	 */
 	public void setFilename(String filename) {
@@ -99,7 +114,8 @@ public class ToDoList extends Observable implements Serializable, Observer {
 	}
 	
 	/**
-	 * Gets a specific TaskList
+	 * Returns the TaskList at the given index. If the index < 0 or the index >= size() 
+	 * an IndexOutOfBoundsException is thrown.
 	 * @param listIdx The index of the TaskList to retrieve
 	 * @return The TaskList with the given index
 	 */
@@ -118,8 +134,11 @@ public class ToDoList extends Observable implements Serializable, Observer {
 	}
 	
 	/**
-	 * Adds a Task to this ToDoList's List of TaskLists
-	 * @return WHAT DOES THIS EVEN RETURN???
+	 * Returns the index of the added TaskList. The tasks array should be resized 
+	 * to accommodate new TaskLists. Every TaskList added should have the ToDoList 
+	 * instance added as an Observer. The Observers of ToDoList are notified of the 
+	 * change. The added TaskList object is passed to notifyObservers().
+	 * @return The index of the added TaskList
 	 */
 	public int addTaskList(){
 		//TODO implement method
@@ -127,7 +146,10 @@ public class ToDoList extends Observable implements Serializable, Observer {
 	}
 	
 	/**
-	 * Removes a TaskList with the specified index
+	 * Removes the TaskList at the given index. The ToDoList instance is removed 
+	 * as an Observer of the removed TaskList. The Observers of ToDoList are notified 
+	 * of the change. If the index < 0 or the index >= size() an IndexOutOfBoundsException 
+	 * is thrown. The removed TaskList object is passed to notifyObservers().
 	 * @param listIdx the index to remove a TaskList
 	 */
 	public void removeTaskList(int listIdx){
@@ -201,9 +223,7 @@ public class ToDoList extends Observable implements Serializable, Observer {
 		}
 	}
 
-	/**
-	 * 
-	 */
+	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 	}

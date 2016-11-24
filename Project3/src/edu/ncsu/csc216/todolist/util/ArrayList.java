@@ -1,6 +1,5 @@
 package edu.ncsu.csc216.todolist.util;
 
-import edu.ncsu.csc216.todolist.model.Category;
 
 /**
  * Custom ArrayList for ToDoList
