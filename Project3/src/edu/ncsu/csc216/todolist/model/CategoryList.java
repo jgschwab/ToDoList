@@ -106,7 +106,7 @@ public class CategoryList extends Observable implements Tabular, Serializable, O
 	 * @param idx The index to remove a Category from
 	 * @return The Category removed from the list at the given index
 	 */
-	public Category removeCategory(int idx){
+	public Category removeCategoryAt(int idx){
 		//TODO implement method
 		return null;
 	}

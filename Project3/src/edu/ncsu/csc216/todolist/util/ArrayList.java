@@ -20,7 +20,15 @@ public class ArrayList implements List {
 	 * Constructs new Object array for this Array List, and sets size to 0
 	 */
 	public ArrayList(){
-		list = new Object[INIT_SIZE];
+		this(INIT_SIZE);
+	}
+	
+	/**
+	 * Constructs new Object array for this ArrayList, with the parameterized initial size
+	 * @param initSize The initial size of this ArrayList
+	 */
+	public ArrayList(int initSize){
+		list = new Object[initSize];
 		size = 0;
 	}
 	
