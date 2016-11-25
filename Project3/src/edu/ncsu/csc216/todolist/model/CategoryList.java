@@ -22,7 +22,9 @@ public class CategoryList extends Observable implements Tabular, Serializable, O
 	 * Constructs the edu.ncsu.csc216.todolist.util.ArrayList and sets nextCategoryNum to 1
 	 */
 	public CategoryList(){
-		//TODO implement constructor
+		name = "Categories";
+		list = new ArrayList();
+		nextCategoryNum = 1;
 	}
 	
 	/**
@@ -30,8 +32,7 @@ public class CategoryList extends Observable implements Tabular, Serializable, O
 	 * @return The name of this CategoryList
 	 */
 	public String getName(){
-		//TODO implement method
-		return null;
+		return name;
 	}
 	
 	/**
@@ -45,8 +46,16 @@ public class CategoryList extends Observable implements Tabular, Serializable, O
 	 * @return true if the Category was added
 	 */
 	public boolean addCategory(String name, String desc){
-		//TODO implement method
-		return false;
+		Category cat = null;
+		try{
+			cat = new Category("C" + nextCategoryNum, name, desc);
+		} catch (IllegalArgumentException e) {
+			return false;
+		}
+		list.add(cat);
+		setChanged();
+		notifyObservers(this);
+		return true;
 	}
 	
 	/**
