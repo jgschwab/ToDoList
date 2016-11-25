@@ -12,14 +12,23 @@ import java.util.Observable;
  */
 
 public class Task extends Observable implements Comparable<Object>, Serializable {
+	/** ID for Serializing this Task */
 	private static final long serialVersionUID = 7459L;
+	/** The title of this Task */
 	private String title;
+	/** The details of this Task */
 	private String details;
+	/** The start time of this Task */
 	private Date startDateTime;
+	/** The due date of this Task */
 	private Date dueDateTime;
+	/** The category to which this Task belongs */
 	private Category category;
+	/** The date when this Task was completed */
 	private Date completedDateTime;
+	/** Whether or not this Task is completed */
 	private boolean completed;
+	/** The unique ID for this Task */
 	private String taskID;
 	
 	/**
@@ -57,8 +66,12 @@ public class Task extends Observable implements Comparable<Object>, Serializable
 	 * @param title the title to set
 	 */
 	public void setTitle(String title) {
-		//TODO implement method
+		if(title == null || title.length() == 0){
+			throw new IllegalArgumentException("Empty Title");
+		}
 		this.title = title;
+		setChanged();
+		notifyObservers(this);
 	}
 
 	/**
@@ -76,8 +89,9 @@ public class Task extends Observable implements Comparable<Object>, Serializable
 	 * @param details the details to set
 	 */
 	public void setDetails(String details) {
-		//TODO implement method
 		this.details = details;
+		setChanged();
+		notifyObservers(this);
 	}
 
 	/**
@@ -95,8 +109,12 @@ public class Task extends Observable implements Comparable<Object>, Serializable
 	 * @param startDateTime the startDateTime to set
 	 */
 	public void setStartDateTime(Date startDateTime) {
-		//TODO implement method
+		if(startDateTime == null){
+			throw new IllegalArgumentException("Null Start Time");
+		}
 		this.startDateTime = startDateTime;
+		setChanged();
+		notifyObservers(this);
 	}
 
 	/**
@@ -114,8 +132,12 @@ public class Task extends Observable implements Comparable<Object>, Serializable
 	 * @param dueDateTime the dueDateTime to set
 	 */
 	public void setDueDateTime(Date dueDateTime) {
-		//TODO implement method
+		if(dueDateTime == null){
+			throw new IllegalArgumentException("Null Due Time");
+		}
 		this.dueDateTime = dueDateTime;
+		setChanged();
+		notifyObservers(this);
 	}
 	
 	/**
@@ -133,8 +155,9 @@ public class Task extends Observable implements Comparable<Object>, Serializable
 	 * @param completedDateTime the completedDateTime to set
 	 */
 	public void setCompletedDateTime(Date completedDateTime) {
-		//TODO implement method
 		this.completedDateTime = completedDateTime;
+		setChanged();
+		notifyObservers(this);
 	}
 
 	/**
@@ -147,13 +170,17 @@ public class Task extends Observable implements Comparable<Object>, Serializable
 
 	/**
 	 * Sets the Category of this Task.
-	 * If the c parameter is null, an IllegalArgumentException is thrown. Otherwise, 
+	 * If the category parameter is null, an IllegalArgumentException is thrown. Otherwise, 
 	 * the category field is set and Observers of Task are notified of the change.
 	 * @param category the category to set
 	 */
 	public void setCategory(Category category) {
-		//TODO implement method
+		if(category == null){
+			throw new IllegalArgumentException("Null Category");
+		}
 		this.category = category;
+		setChanged();
+		notifyObservers(this);
 	}
 
 	/**
@@ -170,8 +197,9 @@ public class Task extends Observable implements Comparable<Object>, Serializable
 	 * @param completed Whether or not this Task should be marked as Completed
 	 */
 	public void setCompleted(boolean completed) {
-		//TODO implement method
 		this.completed = completed;
+		setChanged();
+		notifyObservers(this);
 	}
 
 	/**
@@ -189,8 +217,12 @@ public class Task extends Observable implements Comparable<Object>, Serializable
 	 * @param taskID the taskID to set
 	 */
 	private void setTaskID(String taskID) {
-		//TODO implement method
+		if(taskID == null || taskID.length() == 0){
+			throw new IllegalArgumentException("Empty ID");
+		}
 		this.taskID = taskID;
+		setChanged();
+		notifyObservers(this);
 	}
 
 	@Override
@@ -198,7 +230,6 @@ public class Task extends Observable implements Comparable<Object>, Serializable
 		return this.dueDateTime.compareTo(((Task) arg0).getDueDateTime());
 	}
 
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -207,7 +238,6 @@ public class Task extends Observable implements Comparable<Object>, Serializable
 		return result;
 	}
 
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

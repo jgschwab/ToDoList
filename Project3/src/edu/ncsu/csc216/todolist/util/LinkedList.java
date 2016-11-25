@@ -8,7 +8,7 @@ import edu.ncsu.csc216.todolist.model.Task;
  *
  */
 public class LinkedList implements List {
-
+	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 349987L;
 	private Node head;
 	private int size;
@@ -27,9 +27,11 @@ public class LinkedList implements List {
 	 *
 	 */
 	class Node {
+		@SuppressWarnings("unused")
 		private static final long serialVersionUID = 484909840L;
 		private Node next;
 		Object data;
+		
 		/**
 		 * Constructs a new Node with value and next
 		 * @param o The object that is this Node's data
@@ -40,7 +42,6 @@ public class LinkedList implements List {
 			next = n;
 		}
 	}
-	
 	
 	@Override
 	public int size() {

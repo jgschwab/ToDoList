@@ -13,14 +13,16 @@ import edu.ncsu.csc216.todolist.util.LinkedList;
  *
  */
 public class TaskList extends Observable implements Tabular, Serializable, Observer {
-
+	/** ID for serializing this TaskList */
 	private static final long serialVersionUID = 98734509L;
+	/** The list of Tasks */
 	private LinkedList list;
+	/** The name of this TaskList */
 	private String name;
+	/** The next number for generating a task ID */
 	private int nextTaskNum;
+	/** The ID for this TaskList */
 	private String taskListID;
-	private Date start;
-	private Date start2;
 	
 	/**
 	 * Constructs TaskList; sets nextTaskNum to 1, and sets the fields with the parameter values. 
