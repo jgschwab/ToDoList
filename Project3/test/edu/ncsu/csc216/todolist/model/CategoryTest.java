@@ -7,16 +7,82 @@ import org.junit.Test;
 /**
  * Tests the Category class
  * @author Justin Schwab
- *
+ * @author Zach Scott
  */
 public class CategoryTest {
 
 	/**
-	 * test
+	 * Tests Category class functions
 	 */
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+		//Invalid constructions
+		Category alpha = null;
+		try{
+			alpha = new Category("", "alpha", "Number One");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Invalid Category ID", e.getMessage());
+			assertEquals(null, alpha);
+		}
+		try{
+			alpha = new Category(null, "alpha", "Number One");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Invalid Category ID", e.getMessage());
+			assertEquals(null, alpha);
+		}
+		try{
+			alpha = new Category("a1", "", "Number One");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Invalid Category Name", e.getMessage());
+			assertEquals(null, alpha);
+		}
+		try{
+			alpha = new Category("a1", null, "Number One");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Invalid Category Name", e.getMessage());
+			assertEquals(null, alpha);
+		}
+		try{
+			alpha = new Category("a1", "alpha", "");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Invalid Category Description", e.getMessage());
+			assertEquals(null, alpha);
+		}
+		try{
+			alpha = new Category("a1", "alpha", null);
+		} catch (IllegalArgumentException e) {
+			assertEquals("Invalid Category Description", e.getMessage());
+			assertEquals(null, alpha);
+		}
+		
+		
+		//Valid construction
+		alpha = new Category("a1", "alpha", "Number One");
+		assertEquals("a1", alpha.getCategoryID());
+		assertEquals("alpha", alpha.getName());
+		assertEquals("Number One", alpha.getDescription());
+		assertTrue(alpha.equals(alpha));
+		assertFalse(alpha.equals(null));
+		String s1 = new String("not Alpha");
+		assertFalse(alpha.equals(s1));
+		
+		// tests non-equal comparisons
+		Category beta = new Category("b1", "beta", "Number Two");
+		assertFalse(alpha.equals(beta));
+		assertFalse(alpha.hashCode() == beta.hashCode());
+		assertTrue(beta.compareTo(alpha) > 0);
+		assertFalse(beta.compareTo(alpha) <= 0);
+		assertTrue(alpha.compareTo(beta) < 0);
+		
+		//tests comparison with categories with the same id
+		Category alphaish = new Category("a1", "not quite alpha", "Number One, I guess?");
+		assertTrue(alphaish.equals(alpha));
+		assertTrue(alpha.hashCode() == alphaish.hashCode());
+		assertEquals(alphaish.compareTo(alpha), 0);
+		assertEquals(alpha.compareTo(alphaish), 0);
+		
+		s1 = alpha.toString();
+		assertEquals("Category [name=alpha, description=Number One, categoryID=a1]", s1);
 	}
 
 }
