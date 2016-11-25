@@ -20,36 +20,42 @@ public class CategoryTest {
 		Category alpha = null;
 		try{
 			alpha = new Category("", "alpha", "Number One");
+			fail();
 		} catch (IllegalArgumentException e) {
 			assertEquals("Invalid Category ID", e.getMessage());
 			assertEquals(null, alpha);
 		}
 		try{
 			alpha = new Category(null, "alpha", "Number One");
+			fail();
 		} catch (IllegalArgumentException e) {
 			assertEquals("Invalid Category ID", e.getMessage());
 			assertEquals(null, alpha);
 		}
 		try{
 			alpha = new Category("a1", "", "Number One");
+			fail();
 		} catch (IllegalArgumentException e) {
 			assertEquals("Invalid Category Name", e.getMessage());
 			assertEquals(null, alpha);
 		}
 		try{
 			alpha = new Category("a1", null, "Number One");
+			fail();
 		} catch (IllegalArgumentException e) {
 			assertEquals("Invalid Category Name", e.getMessage());
 			assertEquals(null, alpha);
 		}
 		try{
 			alpha = new Category("a1", "alpha", "");
+			fail();
 		} catch (IllegalArgumentException e) {
 			assertEquals("Invalid Category Description", e.getMessage());
 			assertEquals(null, alpha);
 		}
 		try{
 			alpha = new Category("a1", "alpha", null);
+			fail();
 		} catch (IllegalArgumentException e) {
 			assertEquals("Invalid Category Description", e.getMessage());
 			assertEquals(null, alpha);
