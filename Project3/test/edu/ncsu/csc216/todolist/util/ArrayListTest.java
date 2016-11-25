@@ -202,7 +202,7 @@ public class ArrayListTest {
 	 */
 	@Test
 	public void testRemove(){
-		ArrayList list = new ArrayList();
+		ArrayList list = new ArrayList(3);
 		assertEquals(0, list.size());
 		assertTrue(list.isEmpty());
 		list.add(new Category("General", "general things I need to do", "C1"));

@@ -143,8 +143,7 @@ public class LinkedList implements List {
 		if(size == 1){
 			head = null;
 			size--;
-		}
-		if(index == 0){
+		} else if(index == 0){
 			head = head.next;
 			size--;
 		} else{
@@ -168,14 +167,10 @@ public class LinkedList implements List {
 		if(o == null){
 			throw new NullPointerException("can't index null elements");
 		}
-		Node current = head;
-		if(size == 0 || (size == 1 && !get(0).equals(o))){
-			return -1;
-		}
-		
-		//WORKING HERE
-		for(int i = 1; i < size - 1; i++){
-			current = current.next;
+		for(int i = 0; i < size; i++){
+			if(get(i).equals(o)){
+				return i;
+			}
 		}
 		return -1;
 	}
