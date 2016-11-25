@@ -40,6 +40,7 @@ public class Category extends Observable implements Comparable<Object>, Serializ
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
+		//TODO checks
 		this.name = name;
 	}
 
@@ -57,6 +58,7 @@ public class Category extends Observable implements Comparable<Object>, Serializ
 	 * @param description the description to set
 	 */
 	public void setDescription(String description) {
+		//TODO observers implementation
 		this.description = description;
 	}
 

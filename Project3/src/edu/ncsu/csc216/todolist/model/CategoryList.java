@@ -141,13 +141,14 @@ public class CategoryList extends Observable implements Tabular, Serializable, O
 		nextCategoryNum++;
 	}
 	
-	
+	//Observer
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	//Tabular
 	@Override
 	public Object[][] get2DArray() {
 		// TODO Auto-generated method stub

@@ -16,7 +16,7 @@ import edu.ncsu.csc216.todolist.model.Task;
  */
 public class LinkedListTest {
 
-	private Category c1 = new Category("General", "generaLinkedListI need to do", "C1");
+	private Category c1 = new Category("General", "general things I need to do", "C1");
 	
 	/**
 	 * tests the LinkedList constructor

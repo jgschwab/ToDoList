@@ -1,5 +1,7 @@
 package edu.ncsu.csc216.todolist.util;
 
+import edu.ncsu.csc216.todolist.model.Task;
+
 /**
  * Custom LinkedList for this ToDoList
  * @author Justin Schwab
@@ -9,12 +11,14 @@ public class LinkedList implements List {
 
 	private static final long serialVersionUID = 349987L;
 	private Node head;
+	private int size;
 	
 	/**
 	 * Constructs an empty LinkedList
 	 */
 	public LinkedList(){
-		
+		head = null;
+		size = 0;
 	}
 	
 	/**
@@ -25,40 +29,58 @@ public class LinkedList implements List {
 	class Node {
 		private static final long serialVersionUID = 484909840L;
 		private Node next;
-		protected Object value;
+		Object data;
 		/**
 		 * Constructs a new Node with value and next
 		 * @param o The object that is this Node's data
 		 * @param n This Node's "next" reference
 		 */
 		public Node(Object o, Node n){
-			
+			data = o;
+			next = n;
 		}
 	}
 	
 	
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return size;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return size == 0;
 	}
 
 	@Override
 	public boolean contains(Object o) {
-		// TODO Auto-generated method stub
+		if(isEmpty()){ //check if empty
+			return false;
+		}
+		if(size == 1 && !head.data.equals(o)){ //check head if size is 1
+			return false;
+		}
+		Node temp = head;
+		if(head.data.equals(o)){ //check front if size > 1
+			return true;
+		}
+		while(temp.next != null){ //check the rest if size > 1
+			if(temp.next.data.equals(o)){
+				return true;
+			}
+			temp = temp.next;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean add(Object o) {
-		// TODO Auto-generated method stub
-		return false;
+		try{
+			add(size, o);
+			return true;
+		} catch(Exception e){
+			return false;
+		}
 	}
 
 	@Override
@@ -69,8 +91,38 @@ public class LinkedList implements List {
 
 	@Override
 	public void add(int index, Object element) {
-		// TODO Auto-generated method stub
-
+		if(element == null) {
+			throw new NullPointerException("Can't add null elements");
+		}
+		if(index < 0 || index > size){
+			throw new IndexOutOfBoundsException();
+		}
+		if(!(element instanceof Task)){
+			throw new IllegalArgumentException("Can only add Task objects");
+		} 
+		if(contains(element)){
+			throw new IllegalArgumentException("Can't add duplicate elements");
+		}
+		
+		Node current = head;
+		if(index == 0){
+			Node temp = new Node(element, head);
+			head = temp;
+		} else{
+			for(int i = 1; i < index; i++){
+				current = current.next;
+			}
+			
+			if(current.next != null){ //add in middle of list
+				Node temp = new Node(element, current.next);
+				current.next = temp;
+				size++;
+			} else{ //add at end of list
+				Node temp = new Node(element, null);
+				current.next = temp;
+				size++;
+			}
+		}
 	}
 
 	@Override
@@ -85,26 +137,25 @@ public class LinkedList implements List {
 		return 0;
 	}
 	
-	//------------PRIVATE LINKEDLIST METHODs-------------
+	/*------------PRIVATE LINKEDLIST METHODS LISTED IN DESIGN-------------
+	 * I will not be using these, as they are predicated on the notion that there
+	 * is no head Node or size field. I'm not sure why this was the design;
+	 * it's much more efficient to keep track of these instance variables
 	
 	private Node insertAt(int idx, Object o, Node n){
-		//TODO implement method
 		return null;
 	}
 	
 	private int indexOf(Object o, Node n, int i){
-		//TODO implement method
 		return 0;
 	}
 	
 	private Node remove(int i, Node n){
-		//TODO implement method
 		return null;
 	}
 	
 	private int size(Node n){
-		//TODO implement method
 		return 0;
 	}
-
+	*/
 }
