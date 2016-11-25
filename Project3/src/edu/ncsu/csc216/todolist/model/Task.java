@@ -34,7 +34,12 @@ public class Task extends Observable implements Comparable<Object>, Serializable
 	 */
 	public Task(String title, String details, Date startDateTime,
 			Date dueDateTime, Category category, String taskID){
-		//TODO implement method
+		setTitle(title);
+		setDetails(details);
+		setStartDateTime(startDateTime);
+		setDueDateTime(dueDateTime);
+		setCategory(category);
+		setTaskID(taskID);
 	}
 
 	/**

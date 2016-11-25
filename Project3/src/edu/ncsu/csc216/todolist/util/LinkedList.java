@@ -85,8 +85,19 @@ public class LinkedList implements List {
 
 	@Override
 	public Object get(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		if(index < 0 || index >= size){
+			throw new IndexOutOfBoundsException();
+		}
+		Node current = head;
+		if(size == 1 || index == 0){
+			return head.data;
+		}
+		
+		for(int i = 1; i < index; i++){
+			current = current.next;
+			
+		}
+		return current.next.data;
 	}
 
 	@Override
@@ -108,6 +119,7 @@ public class LinkedList implements List {
 		if(index == 0){
 			Node temp = new Node(element, head);
 			head = temp;
+			size++;
 		} else{
 			for(int i = 1; i < index; i++){
 				current = current.next;
@@ -127,14 +139,45 @@ public class LinkedList implements List {
 
 	@Override
 	public Object remove(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		Object o = get(index);
+		if(size == 1){
+			head = null;
+			size--;
+		}
+		if(index == 0){
+			head = head.next;
+			size--;
+		} else{
+			Node current = head;
+			for(int i = 1; i < index; i++){ //traverse to index 
+				current = current.next;
+			}
+			if(current.next.next == null){ //remove at end of list
+				current.next = null;
+				size--;
+			} else{
+				current.next = current.next.next;
+				size--;
+			}
+		}
+		return o;
 	}
 
 	@Override
 	public int indexOf(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
+		if(o == null){
+			throw new NullPointerException("can't index null elements");
+		}
+		Node current = head;
+		if(size == 0 || (size == 1 && !get(0).equals(o))){
+			return -1;
+		}
+		
+		//WORKING HERE
+		for(int i = 1; i < size - 1; i++){
+			current = current.next;
+		}
+		return -1;
 	}
 	
 	/*------------PRIVATE LINKEDLIST METHODS LISTED IN DESIGN-------------
