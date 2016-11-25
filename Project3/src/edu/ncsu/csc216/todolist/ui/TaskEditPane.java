@@ -20,7 +20,7 @@ public class TaskEditPane extends JPanel implements Observer {
 	private JTextField taskID;
 	private JTextField taskTitle;
 	private JComboBox<Category> taskCat;
-	private JSpinner tastStart;
+	private JSpinner taskStart;
 	private JSpinner taskDue;
 	private JSpinner taskCompleted;
 	private JCheckBox complete;
@@ -46,22 +46,22 @@ public class TaskEditPane extends JPanel implements Observer {
 	}
 	
 	/**
-	 * 
+	 * Initializes the GUI.
 	 */
 	private void init(){
 		//TODO implement
 	}
 	
 	/**
-	 * 
+	 * Initializes the view.
 	 */
 	private void initView(){
 		//TODO implement
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Gets the Spinner for Task's start date
+	 * @return The Spinner for Task's start date 
 	 */
 	JSpinner getTaskStartSpinner(){
 		//TODO implement
@@ -69,8 +69,8 @@ public class TaskEditPane extends JPanel implements Observer {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Gets the Spinner for Task's due date
+	 * @return The Spinner for Task's due date
 	 */
 	JSpinner getTaskDueSpinner(){
 		//TODO implement
@@ -78,8 +78,8 @@ public class TaskEditPane extends JPanel implements Observer {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Gets the Spinner for Task's completed date
+	 * @return The Spinner for Task's completed date
 	 */
 	JSpinner getTaskCompletedSpinner(){
 		//TODO implement
@@ -87,8 +87,8 @@ public class TaskEditPane extends JPanel implements Observer {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Gets the displayed Task start date
+	 * @return The displayed Task start date
 	 */
 	Date getTaskStart(){
 		//TODO implement
@@ -96,8 +96,8 @@ public class TaskEditPane extends JPanel implements Observer {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Gets the displayed Task's due date
+	 * @return The displayed Task's due date
 	 */
 	Date getTaskDue(){
 		//TODO implement
@@ -105,8 +105,8 @@ public class TaskEditPane extends JPanel implements Observer {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Gets the displayed Task's completed date
+	 * @return The displayed Task's completed date
 	 */
 	Date getTaskCompleted(){
 		//TODO implement
@@ -114,22 +114,26 @@ public class TaskEditPane extends JPanel implements Observer {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Gets the text field for the Task's ID
+	 * @return The text field for the displayed Task's ID
 	 */
 	JTextField getTaskID(){
 		//TODO implement
 		return null;
 	}
 	
+	/**
+	 * Gets the text field for the Task's title
+	 * @return The text field for the Task's title
+	 */
 	JTextField getTaskTitle(){
 		//TODO implement
 		return null;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Gets the combo box of the Task's category
+	 * @return The combo box of the Task's category
 	 */
 	JComboBox<Category> getCategory(){
 		//TODO implement
@@ -137,8 +141,8 @@ public class TaskEditPane extends JPanel implements Observer {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Gets the text area for the Task's details
+	 * @return The text area for the Task's details
 	 */
 	JTextArea getTaskDetails(){
 		//TODO implement
@@ -146,8 +150,8 @@ public class TaskEditPane extends JPanel implements Observer {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Gets the checkbox for whether or not the Task is complete
+	 * @return The checkbox for whether or not the Task is complete
 	 */
 	JCheckBox getComplete(){
 		//TODO implement
@@ -155,32 +159,32 @@ public class TaskEditPane extends JPanel implements Observer {
 	}
 	
 	/**
-	 * 
-	 * @param date
+	 * Sets the Task's start date
+	 * @param date The date to set this Pane's startDate to
 	 */
 	void setTaskStart(Date date){
 		//TODO implement
 	}
 	
 	/**
-	 * 
-	 * @param date
+	 * Sets the Task's due date
+	 * @param date The date to set as the Task's due date
 	 */
 	void setTaskDue(Date date){
 		//TODO implement
 	}
 	
 	/**
-	 * 
-	 * @param date
+	 * Sets the date when the Task was completed
+	 * @param date The date when the Task was completed
 	 */
 	void setTaskComplete(Date date){
 		//TODO implement
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Determines if the pane is in add mode
+	 * @return true if the pane is in add mode
 	 */
 	boolean isAddMode(){
 		//TODO implement
@@ -188,8 +192,8 @@ public class TaskEditPane extends JPanel implements Observer {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Determines is the pane is in edit mode
+	 * @return true if the pane is in edit mode
 	 */
 	boolean isEditMode(){
 		//TODO implement
@@ -197,20 +201,21 @@ public class TaskEditPane extends JPanel implements Observer {
 	}
 	
 	/**
-	 * 
+	 * enables add mode
 	 */
 	void enableAdd(){
 		//TODO implement
 	}
 	
 	/**
-	 * 
+	 * disables add mode
 	 */
 	void disableAdd(){
 		//TODO implement
 	}
 	
 	/**
+	 * Enables edit mode for the parameterized data
 	 * @param data The TaskData to enable editing
 	 */
 	void enableEdit(TaskData data){
@@ -218,15 +223,15 @@ public class TaskEditPane extends JPanel implements Observer {
 	}
 	
 	/**
-	 * 
+	 * Disables edit mode
 	 */
 	void disableEdit(){
 		//TODO implement
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Returns true if the required fields are not empty.
+	 * @return true if the required fields are not empty
 	 */
 	boolean fieldsNotEmpty(){
 		//TODO implement
@@ -234,38 +239,39 @@ public class TaskEditPane extends JPanel implements Observer {
 	}
 	
 	/**
-	 * 
-	 * @param data
+	 * Initializes TaskData to the given value
+	 * @param data The new TaskData to set
 	 */
 	void setTaskData(TaskData data){
 		//TODO implement
 	}
 	
 	/**
-	 * 
-	 * @param e
+	 * Adds event listeners to fields
+	 * @param e The event listener to add to fields
 	 */
 	void addFieldListener(EventListener e){
 		//TODO implement
 	}
 	
 	/**
-	 * 
+	 * Fills the fields with the appropriate text from the TaskData field
 	 */
 	void fillFields(){
 		//TODO implement
 	}
 	
 	/**
-	 * 
+	 * Clears the fields by setting data to null.
 	 */
 	void clearFields(){
-		//TODO implement
+		data = null;
+		fillFields();
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Returns the fields as a TaskData object.
+	 * @return the fields as a TaskData object
 	 */
 	TaskData getFields(){
 		//TODO implement

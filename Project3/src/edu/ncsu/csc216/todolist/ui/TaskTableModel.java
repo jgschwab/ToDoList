@@ -3,7 +3,8 @@ package edu.ncsu.csc216.todolist.ui;
 import javax.swing.table.AbstractTableModel;
 
 /**
- * 
+ * TaskTableModel is a wrapper for the information in TaskList that 
+ * can be used by a JTable. 
  * @author Justin Schwab
  *
  */

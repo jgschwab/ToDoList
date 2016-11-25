@@ -11,9 +11,12 @@ import org.junit.Test;
  */
 public class CategoryListTest {
 
+	/**
+	 * test
+	 */
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void test(){
+		fail("not yet implemented");
 	}
 	
 }
