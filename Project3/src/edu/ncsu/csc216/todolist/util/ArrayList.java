@@ -1,5 +1,6 @@
 package edu.ncsu.csc216.todolist.util;
 
+import edu.ncsu.csc216.todolist.model.Category;
 
 /**
  * Custom ArrayList for ToDoList
@@ -8,6 +9,7 @@ package edu.ncsu.csc216.todolist.util;
  */
 public class ArrayList implements List {
 
+	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 28592L;
 	/** The initial size of array. */
 	private static final int INIT_SIZE = 10;
@@ -35,50 +37,107 @@ public class ArrayList implements List {
 	
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return size;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return size == 0;
 	}
 
 	@Override
 	public boolean contains(Object o) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean add(Object o) {
-		// TODO Auto-generated method stub
+		for(int i = 0; i < size; i++){
+			if(list[i].equals(o)){
+				return true;
+			}
+		}
 		return false;
 	}
 
 	@Override
 	public Object get(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		return list[index];
+	}
+	
+	@Override
+	public boolean add(Object item) {
+		try{
+			add(size, item);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	@Override
-	public void add(int index, Object element) {
-		// TODO Auto-generated method stub
-
+	public void add(int idx, Object item) {
+		if(item == null){
+			throw new NullPointerException();
+		}
+		
+		if(!(item instanceof Category)){
+			throw new IllegalArgumentException();
+		}
+		for(int i = 0; i < size; i++){
+			if(item.equals(list[i])){
+				throw new IllegalArgumentException();
+			}
+		}
+		if(idx < 0 || idx > size){
+			throw new IndexOutOfBoundsException();
+		}
+		
+		if(size + 1 == list.length){
+			growArray();
+		}
+		
+		//actually add it
+		if(idx != size){
+			for(int i = size; i >= idx; i--){
+				list[i + 1] = list[i];
+			}
+			list[idx] = item;
+			size++;
+		} else{
+			list[size] = item;
+			size++;
+		}
 	}
 
 	@Override
-	public Object remove(int index) {
-		// TODO Auto-generated method stub
-		return null;
+	public Object remove(int idx) {
+		if (idx < 0 || idx >= size || size == 0) {
+			throw new IndexOutOfBoundsException();
+		}
+		Object ret = list[idx];
+		for (int i = idx; i < size + 1; i++) {
+			list[i] = list[i + 1];
+		}
+		list[size] = null;
+		size--;
+		return ret;
 	}
 
 	@Override
 	public int indexOf(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
+		for(int i = 0; i < size; i++){
+			if(list[i] == o){
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	/**
+	 * Doubles the length of array
+	 */
+	private void growArray(){
+		Object[] tempList = new Object[list.length * 2];
+		for(int i = 0; i < list.length; i++){
+			tempList[i] = list[i];
+		}
+		list = tempList;
 	}
 
 }

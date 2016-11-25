@@ -10,9 +10,9 @@ import java.util.Observable;
  */
 public class Category extends Observable implements Comparable<Object>, Serializable {
 	private static final long serialVersionUID = 459188L;
+	private String categoryID;
 	private String name;
 	private String description;
-	private String categoryID;
 	
 	/**
 	 * Constructs a Category
@@ -20,7 +20,7 @@ public class Category extends Observable implements Comparable<Object>, Serializ
 	 * @param description The Category's description
 	 * @param categoryID The Category's ID
 	 */
-	public Category(String name, String description, String categoryID){
+	public Category(String categoryID, String name, String description){
 		this.setName(name);
 		this.setDescription(description);
 		this.setCategoryID(categoryID);

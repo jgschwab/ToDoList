@@ -10,7 +10,8 @@ import java.util.Observable;
  * @author Justin Schwab
  *
  */
-public class Task extends Observable implements Comparable, Serializable {
+
+public class Task extends Observable implements Comparable<Object>, Serializable {
 	private static final long serialVersionUID = 7459L;
 	private String title;
 	private String details;
