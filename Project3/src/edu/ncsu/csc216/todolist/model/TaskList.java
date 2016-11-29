@@ -173,6 +173,7 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 			throw new IndexOutOfBoundsException();
 		}
 		Task removed = (Task) list.remove(idx);
+		setChanged();
 		notifyObservers(removed);
 		removed.deleteObserver(this);
 		return removed;
@@ -188,6 +189,7 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 	public boolean removeTask(String id){
 		try{
 			Task removed = (Task)list.remove(indexOf(id));
+			setChanged();
 			notifyObservers(removed);
 			removed.deleteObserver(this);
 			return true;
