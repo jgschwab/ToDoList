@@ -225,6 +225,7 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 	 */
 	@Override
 	public void update(Observable o, Object arg){
-		//TODO implement
+		setChanged();
+		notifyObservers(arg);
 	}
 }

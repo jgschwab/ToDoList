@@ -68,5 +68,6 @@ public class TaskListTest {
 		assertEquals(0, tlist.indexOf("TL1-T1"));
 		assertEquals(1, tlist.indexOf("TL1-T2"));
 		assertEquals(2, tlist.size());
-		}
+		
+	}
 }
