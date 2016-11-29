@@ -110,7 +110,12 @@ public class LinkedListTest {
 		assertEquals(1, list.size());
 		assertEquals(new Task("Do Project 3", "finish this project before I drop dead", new Date(), new Date(), c1, "T1"), list.get(0));
 		
-		assertFalse("Can't add duplicates", list.add(o));
+		try{
+			list.add(o);
+			fail("shouldn't be able to add duplicates");
+		} catch(IllegalArgumentException e){
+			//PASS
+		}
 		
 		
 		

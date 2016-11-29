@@ -107,7 +107,12 @@ public class ArrayListTest {
 		assertEquals(1, list.size());
 		assertEquals(new Category("General", "general things I need to do", "C1"), list.get(0));
 		
-		assertFalse("Can't add duplicates", list.add(o));
+		try{
+			list.add(o);
+			fail("shouldn't be able to add duplicates");
+		} catch(IllegalArgumentException e){
+			//PASS
+		}
 		
 		Object o2 = new Category("Specific", "Specific things I need to do", "C2");
 		list.add(o2);
