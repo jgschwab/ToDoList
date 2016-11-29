@@ -166,7 +166,8 @@ public class ToDoList extends Observable implements Serializable, Observer {
 			i++;
 		}
 		tasks[i] = tlist;
-		tlist.addObserver(this);
+		tasks[i].addObserver(this);
+		setChanged();
 		this.notifyObservers(tlist);
 		numLists++;
 		return i;
@@ -191,6 +192,7 @@ public class ToDoList extends Observable implements Serializable, Observer {
 		}
 		tasks[tasks.length - 1] = null;
 		removed.deleteObserver(this);
+		setChanged();
 		notifyObservers(removed);
 		numLists--;
 	}

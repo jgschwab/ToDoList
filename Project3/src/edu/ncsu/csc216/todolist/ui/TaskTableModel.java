@@ -10,7 +10,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class TaskTableModel extends AbstractTableModel {
 	private static final long serialVersionUID =  5954551753060998701L;
-	private String[] colNames;
+	private String[] colNames = {"ID", "Title", "Start Date", "Due Date", "Completed Date", "Complete", "Category"};
 	private Object[][] data;
 	
 	/** 
@@ -18,7 +18,7 @@ public class TaskTableModel extends AbstractTableModel {
 	 * @param data the data to populate the TableModel
 	 */
 	public TaskTableModel(Object[][] data){
-		//TODO implement
+		this.data = data;
 	}
 	
 	/**
