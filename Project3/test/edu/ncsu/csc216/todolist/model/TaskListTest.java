@@ -68,6 +68,15 @@ public class TaskListTest {
 		assertEquals(0, tlist.indexOf("TL1-T1"));
 		assertEquals(1, tlist.indexOf("TL1-T2"));
 		assertEquals(2, tlist.size());
+		assertTrue(tlist.removeTask("TL1-T1"));
+		assertEquals(1, tlist.size());
+		assertEquals(0, tlist.indexOf("TL1-T2"));
+		assertFalse(tlist.removeTask("LOLOLOLOL"));
+		try{
+			tlist.setName("");
+		} catch(IllegalArgumentException e){
+			assertEquals("My Tasks", tlist.getName());
+		}
 		
 	}
 }

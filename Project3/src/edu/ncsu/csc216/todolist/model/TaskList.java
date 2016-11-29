@@ -187,14 +187,15 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 	 * @return true if the Task was removed
 	 */
 	public boolean removeTask(String id){
-		try{
-			Task removed = (Task)list.remove(indexOf(id));
+		int x = indexOf(id);
+		if(x == -1){
+			return false;
+		} else{ 
+			Task removed = (Task)list.remove(x);
 			setChanged();
 			notifyObservers(removed);
 			removed.deleteObserver(this);
 			return true;
-		} catch(IndexOutOfBoundsException e){
-			return false;
 		}
 	}
 	
