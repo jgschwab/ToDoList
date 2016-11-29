@@ -263,6 +263,7 @@ public class ToDoList extends Observable implements Serializable, Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
+		setChanged(true);
+		notifyObservers(arg);
 	}
 }
