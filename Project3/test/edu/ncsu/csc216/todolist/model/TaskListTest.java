@@ -51,5 +51,22 @@ public class TaskListTest {
 		assertEquals(2, tlist.indexOf("TL1-T4"));
 		assertEquals(3, tlist.indexOf("TL1-T2"));
 		assertEquals(4, tlist.indexOf("TL1-T5"));
-	}
+		assertEquals(5, tlist.size());
+		
+		assertEquals("TL1-T3", tlist.removeTaskAt(0).getTaskID()); //remove at front
+		assertEquals(0, tlist.indexOf("TL1-T1"));
+		assertEquals(1, tlist.indexOf("TL1-T4"));
+		assertEquals(2, tlist.indexOf("TL1-T2"));
+		assertEquals(3, tlist.indexOf("TL1-T5"));
+		assertEquals(4, tlist.size());
+		assertEquals("TL1-T5", tlist.removeTaskAt(3).getTaskID()); //remove at end
+		assertEquals(0, tlist.indexOf("TL1-T1"));
+		assertEquals(1, tlist.indexOf("TL1-T4"));
+		assertEquals(2, tlist.indexOf("TL1-T2"));
+		assertEquals(3, tlist.size());
+		assertEquals("TL1-T4", tlist.removeTaskAt(1).getTaskID()); //remove middle
+		assertEquals(0, tlist.indexOf("TL1-T1"));
+		assertEquals(1, tlist.indexOf("TL1-T2"));
+		assertEquals(2, tlist.size());
+		}
 }
