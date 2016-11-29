@@ -150,6 +150,6 @@ public class Category extends Observable implements Comparable<Object>, Serializ
 	 */
 	@Override
 	public String toString() {
-		return "Category [name=" + name + ", description=" + description + ", categoryID=" + categoryID + "]";
+		return this.name;
 	}
 }

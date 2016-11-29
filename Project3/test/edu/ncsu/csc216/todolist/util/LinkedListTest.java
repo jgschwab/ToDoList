@@ -152,6 +152,18 @@ public class LinkedListTest {
 		list.add(o2);
 		
 		assertEquals(new Task("Do Project 3", "finish this project before I drop dead", new Date(), new Date(), c1, "T1"), list.get(0));
+		try{
+			list.get(-1);
+			fail("should throw IOOBE");
+		} catch(IndexOutOfBoundsException e){
+			//Pass
+		}
+		try{
+			list.get(list.size());
+			fail("shoudl throw IOOBE");
+		} catch(IndexOutOfBoundsException e){
+			//PASS
+		}
 	}
 	
 	/**

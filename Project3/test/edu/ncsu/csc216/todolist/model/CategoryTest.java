@@ -88,7 +88,7 @@ public class CategoryTest {
 		assertEquals(alpha.compareTo(alphaish), 0);
 		
 		s1 = alpha.toString();
-		assertEquals("Category [name=alpha, description=Number One, categoryID=a1]", s1);
+		assertEquals("alpha", s1);
 	}
 
 }

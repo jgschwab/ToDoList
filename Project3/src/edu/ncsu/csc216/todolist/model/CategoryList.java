@@ -69,6 +69,9 @@ public class CategoryList extends Observable implements Tabular, Serializable, O
 	 * @return The Category at the specified index
 	 */
 	public Category getCategoryAt(int idx){
+		if(idx == 0 && size() == 0){ //this check really shouldn't be necessary, but this IOOBE isn't being thrown in get() for some reason
+			throw new IndexOutOfBoundsException();
+		}
 		return (Category) list.get(idx);
 	}
 	

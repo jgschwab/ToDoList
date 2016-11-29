@@ -28,6 +28,9 @@ public class ArrayList implements List, Serializable {
 	 * @param initSize The initial size of this ArrayList
 	 */
 	public ArrayList(int initSize){
+		if(initSize == 0){
+			throw new IllegalArgumentException("Can't initialize with capacity 0");
+		}
 		list = new Object[initSize];
 		size = 0;
 	}
@@ -55,11 +58,17 @@ public class ArrayList implements List, Serializable {
 
 	@Override
 	public Object get(int index) {
+		if(index < 0 || index >= size){
+			throw new IndexOutOfBoundsException();
+		}
 		return list[index];
 	}
 	
 	@Override
 	public boolean add(Object item) {
+		if(item == null){
+			throw new NullPointerException("Can't add null elements");
+		}
 		try{
 			add(size, item);
 			return true;

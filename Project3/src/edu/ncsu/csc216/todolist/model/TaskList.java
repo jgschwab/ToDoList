@@ -188,7 +188,7 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 			Task removed = (Task)list.remove(indexOf(id));
 			notifyObservers(removed);
 			removed.deleteObserver(this);
-			return removed != null;
+			return true;
 		} catch(IndexOutOfBoundsException e){
 			return false;
 		}

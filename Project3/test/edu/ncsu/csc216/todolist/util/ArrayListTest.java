@@ -147,6 +147,19 @@ public class ArrayListTest {
 		list.add(o2);
 		
 		assertEquals(new Category("General", "general things I need to do", "C1"), list.get(0));
+		
+		try{
+			list.get(-1);
+			fail("should throw IOOBE");
+		} catch(IndexOutOfBoundsException e){
+			//Pass
+		}
+		try{
+			list.get(list.size());
+			fail("shoudl throw IOOBE");
+		} catch(IndexOutOfBoundsException e){
+			//PASS
+		}
 	}
 	
 	/**

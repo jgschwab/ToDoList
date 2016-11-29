@@ -25,8 +25,7 @@ public class LinkedList implements List, Serializable {
 	 * @author Justin Schwab
 	 *
 	 */
-	class Node {
-		@SuppressWarnings("unused")
+	class Node implements Serializable {
 		private static final long serialVersionUID = 484909840L;
 		private Node next;
 		Object data;
@@ -92,6 +91,9 @@ public class LinkedList implements List, Serializable {
 
 	@Override
 	public boolean add(Object o) {
+		if(o == null){
+			throw new NullPointerException("Can't add null elements");
+		}
 		try{
 			add(size, o);
 			return true;
