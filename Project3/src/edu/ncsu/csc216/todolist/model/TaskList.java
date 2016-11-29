@@ -225,7 +225,11 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 	 */
 	@Override
 	public void update(Observable o, Object arg){
-		setChanged();
-		notifyObservers(arg);
+		Task temp = (Task) o;
+		int index = indexOf(temp.getTaskID());
+		if(index > 0 && index < list.size()){
+			setChanged();
+			notifyObservers(arg);
+		}
 	}
 }
