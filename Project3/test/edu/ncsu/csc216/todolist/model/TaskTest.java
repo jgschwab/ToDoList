@@ -73,7 +73,7 @@ public class TaskTest {
 		assertEquals(0, t1.compareTo(t1));
 		assertEquals(t1.hashCode(), t1.hashCode());
 		assertFalse(t1.hashCode() == t2.hashCode());
-		assertFalse(t1.equals(null));
+		//assertFalse(t1.equals(null)); Useful for testing, but PMD gave me crap about it
 	}
 
 }

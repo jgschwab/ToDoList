@@ -2,8 +2,6 @@ package edu.ncsu.csc216.todolist.util;
 
 import java.io.Serializable;
 
-import edu.ncsu.csc216.todolist.model.Category;
-
 /**
  * Custom ArrayList for ToDoList
  * @author Justin Schwab
@@ -74,10 +72,6 @@ public class ArrayList implements List, Serializable {
 	public void add(int idx, Object item) {
 		if(item == null){
 			throw new NullPointerException();
-		}
-		
-		if(!(item instanceof Category)){
-			throw new IllegalArgumentException();
 		}
 		for(int i = 0; i < size; i++){
 			if(item.equals(list[i])){

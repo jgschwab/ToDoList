@@ -2,8 +2,6 @@ package edu.ncsu.csc216.todolist.util;
 
 import java.io.Serializable;
 
-import edu.ncsu.csc216.todolist.model.Task;
-
 /**
  * Custom LinkedList for this ToDoList
  * @author Justin Schwab
@@ -76,16 +74,6 @@ public class LinkedList implements List, Serializable {
 	}
 
 	@Override
-	public boolean add(Object o) {
-		try{
-			add(size, o);
-			return true;
-		} catch(Exception e){
-			return false;
-		}
-	}
-
-	@Override
 	public Object get(int index) {
 		if(index < 0 || index >= size){
 			throw new IndexOutOfBoundsException();
@@ -103,6 +91,16 @@ public class LinkedList implements List, Serializable {
 	}
 
 	@Override
+	public boolean add(Object o) {
+		try{
+			add(size, o);
+			return true;
+		} catch(Exception e){
+			return false;
+		}
+	}
+	
+	@Override
 	public void add(int index, Object element) {
 		if(element == null) {
 			throw new NullPointerException("Can't add null elements");
@@ -110,9 +108,6 @@ public class LinkedList implements List, Serializable {
 		if(index < 0 || index > size){
 			throw new IndexOutOfBoundsException();
 		}
-		if(!(element instanceof Task)){
-			throw new IllegalArgumentException("Can only add Task objects");
-		} 
 		if(contains(element)){
 			throw new IllegalArgumentException("Can't add duplicate elements");
 		}

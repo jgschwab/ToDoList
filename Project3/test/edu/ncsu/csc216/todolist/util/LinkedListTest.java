@@ -55,14 +55,6 @@ public class LinkedListTest {
 		}
 		
 		
-		Object o2 = new Category("General", "general things I need to do", "C1");
-		try{
-			list.add(0, o2);
-			fail("Shouldn't be able to add Category objects, only Tasks");
-		} catch(IllegalArgumentException e){
-			assertEquals(0, list.size());
-		}
-		
 		list.add(0, o); //add to empty
 		assertEquals(1, list.size());
 		assertEquals(new Task("Do Project 3", "finish this project before I drop dead", new Date(), new Date(), c1, "T1"), list.get(0));
@@ -76,7 +68,7 @@ public class LinkedListTest {
 			assertEquals(new Task("Do Project 3", "finish this project before I drop dead", new Date(), new Date(), c1, "T1"), list.get(0));
 		}
 		
-		o2 = new Task("Do Lab", "finish the lab before my team kills me", new Date(), new Date(), c1, "T2");
+		Object o2 = new Task("Do Lab", "finish the lab before my team kills me", new Date(), new Date(), c1, "T2");
 		list.add(1, o2); //add to end
 		assertEquals(2, list.size());
 		assertEquals(new Task("Do Project 3", "finish this project before I drop dead", new Date(), new Date(), c1, "T1"), list.get(0));
@@ -121,11 +113,8 @@ public class LinkedListTest {
 		assertFalse("Can't add duplicates", list.add(o));
 		
 		
-		Object o2 = new Category("General", "general things I need to do", "C1");
-
-		assertFalse("Can't add Tasks, only Categories", list.add(o2));
 		
-		o2 = new Task("Do Lab", "finish the lab before my team kills me", new Date(), new Date(), c1, "T2");
+		Object o2 = new Task("Do Lab", "finish the lab before my team kills me", new Date(), new Date(), c1, "T2");
 		list.add(o2);
 		assertEquals(2, list.size());
 		assertEquals(new Task("Do Project 3", "finish this project before I drop dead", new Date(), new Date(), c1, "T1"), list.get(0));

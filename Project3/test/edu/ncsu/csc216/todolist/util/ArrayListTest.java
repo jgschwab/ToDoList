@@ -2,12 +2,9 @@ package edu.ncsu.csc216.todolist.util;
 
 import static org.junit.Assert.*;
 
-import java.util.Date;
-
 import org.junit.Test;
 
 import edu.ncsu.csc216.todolist.model.Category;
-import edu.ncsu.csc216.todolist.model.Task;
 
 /**
  * Tests the custom ArrayList for ToDoList
@@ -55,15 +52,6 @@ public class ArrayListTest {
 			assertEquals(0, list.size());
 		}
 		
-		
-		Object o2 = new Task("Test Task 1", "Test Task 1 details", new Date(), new Date(), (Category)o, "test task id");
-		try{
-			list.add(0, o2);
-			fail("Shouldn't be able to add Task objects, only Categories");
-		} catch(IllegalArgumentException e){
-			assertEquals(0, list.size());
-		}
-		
 		list.add(0, o); //add to empty
 		assertEquals(1, list.size());
 		assertEquals(new Category("General", "general things I need to do", "C1"), list.get(0));
@@ -77,7 +65,7 @@ public class ArrayListTest {
 			assertEquals(new Category("General", "general things I need to do", "C1"), list.get(0));
 		}
 		
-		o2 = new Category("Specific", "Specific things I need to do", "C2");
+		Object o2 = new Category("Specific", "Specific things I need to do", "C2");
 		list.add(1, o2); //add to end
 		assertEquals(2, list.size());
 		assertEquals(new Category("General", "general things I need to do", "C1"), list.get(0));
@@ -121,12 +109,7 @@ public class ArrayListTest {
 		
 		assertFalse("Can't add duplicates", list.add(o));
 		
-		
-		Object o2 = new Task("Test Task 1", "Test Task 1 details", new Date(), new Date(), (Category)o, "test task id");
-
-		assertFalse("Can't add Tasks, only Categories", list.add(o2));
-		
-		o2 = new Category("Specific", "Specific things I need to do", "C2");
+		Object o2 = new Category("Specific", "Specific things I need to do", "C2");
 		list.add(o2);
 		assertEquals(2, list.size());
 		assertEquals(new Category("General", "general things I need to do", "C1"), list.get(0));

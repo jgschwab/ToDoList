@@ -226,8 +226,8 @@ public class Task extends Observable implements Comparable<Object>, Serializable
 	}
 
 	@Override
-	public int compareTo(Object arg0) {
-		return this.dueDateTime.compareTo(((Task) arg0).getDueDateTime());
+	public int compareTo(Object o) {
+		return this.dueDateTime.compareTo(((Task) o).getDueDateTime());
 	}
 
 	@Override
