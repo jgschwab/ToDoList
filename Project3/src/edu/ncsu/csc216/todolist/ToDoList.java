@@ -264,6 +264,7 @@ public class ToDoList extends Observable implements Serializable, Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		setChanged(true);
+		setChanged();
 		notifyObservers(arg);
 	}
 }
