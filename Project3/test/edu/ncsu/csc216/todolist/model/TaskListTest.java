@@ -41,11 +41,15 @@ public class TaskListTest {
 		assertEquals("TL1-T1", tlist.get2DArray()[0][0]);
 		assertEquals("Finish this test class", tlist.get2DArray()[0][1]);
 		assertEquals("Finish this test class", tlist.get2DArray()[0][1]);
-		assertEquals(0, tlist.indexOf("TL1-T1"));
+		assertTrue(tlist.addTask("testing 2", "more testing", new Date(2016, 11, 10), new Date(2016, 11, 20), c)); //add at end
+		assertTrue(tlist.addTask("Finish this test class", "just keep writing tests...", new Date(2016, 11, 3), new Date(2016, 11, 1), c)); //add at front
+		assertTrue(tlist.addTask("testing 4", "all the tests", new Date(2016, 10, 9), new Date(2016, 11, 18), c)); //add in middle
+		assertTrue(tlist.addTask("testing 5", "MOAARRR", new Date(2016, 11, 1), new Date(2016, 11, 30), c));
 		
-		assertTrue(tlist.addTask("Finish this test class", "just keep writing tests...", new Date(2016, 11, 3), new Date(2016, 11, 30), c));
-		assertEquals("TL1-T1", tlist.removeTaskAt(0).getTaskID());
-		assertTrue(tlist.removeTask("TL1-T2"));
+		assertEquals(0, tlist.indexOf("TL1-T3"));
+		assertEquals(1, tlist.indexOf("TL1-T1"));
+		assertEquals(2, tlist.indexOf("TL1-T4"));
+		assertEquals(3, tlist.indexOf("TL1-T2"));
+		assertEquals(4, tlist.indexOf("TL1-T5"));
 	}
-
 }

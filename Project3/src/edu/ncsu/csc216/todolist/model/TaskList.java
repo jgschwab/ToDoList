@@ -57,6 +57,8 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 			throw new IllegalArgumentException("Invalid Name");
 		}
 		this.name = name;
+		setChanged();
+		notifyObservers(this);
 	}
 	
 	/**
