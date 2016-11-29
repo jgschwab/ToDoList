@@ -24,28 +24,25 @@ import edu.ncsu.csc216.todolist.model.TaskList;
  * 
  */
 public class ToDoList extends Observable implements Serializable, Observer {
-	
-	
+	/** ID for object serialization */
 	private static final long serialVersionUID = 34992L;
-	
-	
 	/**
 	 * Increment for increasing the capacity of the array of TaskLists
 	 */
 	private static final int RESIZE = 3;
 	
-	
+	/** The array of TaskLists that this ToDoList keeps track of */
 	private TaskList[] tasks;
-	
-	private int numLists;
-	
+	/** The number of TaskLists */
+	private int numLists = 0;
+	/** The CategoryList associated with this ToDoList */
 	private CategoryList categories;
-	
+	/** The file name associated with this ToDoList */
 	private String filename;
-	
+	/** Whether or not this ToDoList has been changed */
 	private boolean changed;
-	
-	private int nextTaskListNum;
+	/** Counter for the next taskList number used for assigining IDs */
+	private int nextTaskListNum = 1;
 	
 	/**
 	 * Constructs the ToDoList by doing the following: 
@@ -57,7 +54,11 @@ public class ToDoList extends Observable implements Serializable, Observer {
 	 * 4. Changed is set to false.
 	 */
 	public ToDoList(){
-		
+		tasks = new TaskList[3];
+		addTaskList();
+		categories = new CategoryList();
+		categories.addObserver(this);
+		tasks[0].addObserver(this);
 	}
 	
 	/**
@@ -65,8 +66,7 @@ public class ToDoList extends Observable implements Serializable, Observer {
 	 * @return true if this ToDoList has been changed
 	 */
 	public boolean isChanged(){
-		//TODO implement method
-		return false;
+		return changed;
 	}
 	
 	/**
@@ -74,7 +74,7 @@ public class ToDoList extends Observable implements Serializable, Observer {
 	 * @param c Whether or not this ToDoList is changed
 	 */
 	public void setChanged(boolean c){
-		
+		changed = c;
 	}
 	
 	/**
@@ -91,17 +91,33 @@ public class ToDoList extends Observable implements Serializable, Observer {
 	 * @param filename the name of the file to use
 	 */
 	public void setFilename(String filename) {
-		//TODO implement method
-		//this.filename = filename;
+		if(filename == null || filename.length() == 0){
+			throw new IllegalArgumentException("Invalid File Name");
+		}
+		this.filename = filename;
 	}
 	
+	/**
+	 * Gets the next TaskList number for assigning IDs
+	 * @return the next TaskList number
+	 */
 	private int getNextTaskListNum(){
-		//TODO implement method
-		return 0;
+		int num = this.nextTaskListNum;
+		incNextTaskListNum();
+		return num;
 	}
 	
 	private void incNextTaskListNum(){
 		nextTaskListNum++;
+	}
+	
+	private void growArray(){
+		int newSize = tasks.length + RESIZE;
+		TaskList[] temp = new TaskList[newSize];
+		for(int i = 0; i < numLists; i++){
+			temp[i] = tasks[i];
+		}
+		tasks = temp;
 	}
 	
 	/**
@@ -109,19 +125,20 @@ public class ToDoList extends Observable implements Serializable, Observer {
 	 * @return the number of Task Lists
 	 */
 	public int getNumTaskLists(){
-		//TODO implement method
-		return 0;
+		return numLists;
 	}
 	
 	/**
 	 * Returns the TaskList at the given index. If the index < 0 or the index >= size() 
 	 * an IndexOutOfBoundsException is thrown.
-	 * @param listIdx The index of the TaskList to retrieve
+	 * @param idx The index of the TaskList to retrieve
 	 * @return The TaskList with the given index
 	 */
-	public TaskList getTaskList(int listIdx){
-		//TODO implement method
-		return null;
+	public TaskList getTaskList(int idx){
+		if(idx < 0 || idx >= numLists){
+			throw new IndexOutOfBoundsException();
+		}
+		return tasks[idx];
 	}
 	
 	/**
@@ -129,8 +146,7 @@ public class ToDoList extends Observable implements Serializable, Observer {
 	 * @return The CategoryList associated with this ToDoList
 	 */
 	public CategoryList getCategoryList(){
-		//TODO implement method
-		return null;
+		return categories;
 	}
 	
 	/**
@@ -141,8 +157,19 @@ public class ToDoList extends Observable implements Serializable, Observer {
 	 * @return The index of the added TaskList
 	 */
 	public int addTaskList(){
-		//TODO implement method
-		return 0;
+		if(numLists == tasks.length){
+			growArray();
+		}
+		TaskList tlist = new TaskList("New List", "TL" + getNextTaskListNum());
+		int i = 0;
+		while(tasks[i] != null){
+			i++;
+		}
+		tasks[i] = tlist;
+		tlist.addObserver(this);
+		this.notifyObservers(tlist);
+		numLists++;
+		return i;
 	}
 	
 	/**
@@ -150,10 +177,22 @@ public class ToDoList extends Observable implements Serializable, Observer {
 	 * as an Observer of the removed TaskList. The Observers of ToDoList are notified 
 	 * of the change. If the index < 0 or the index >= size() an IndexOutOfBoundsException 
 	 * is thrown. The removed TaskList object is passed to notifyObservers().
-	 * @param listIdx the index to remove a TaskList
+	 * @param index the index to remove a TaskList
 	 */
-	public void removeTaskList(int listIdx){
-		
+	public void removeTaskList(int index){
+		if(index < 0 || index >= numLists){
+			throw new IndexOutOfBoundsException();
+		}
+		TaskList removed = getTaskList(index);
+		tasks[index] = null;
+		//shift
+		for(int i = index; i < tasks.length - 1; i++){
+			tasks[i] = tasks[i + 1];
+		}
+		tasks[tasks.length - 1] = null;
+		removed.deleteObserver(this);
+		notifyObservers(removed);
+		numLists--;
 	}
 	
 	/**
@@ -211,7 +250,6 @@ public class ToDoList extends Observable implements Serializable, Observer {
 			changed = false;
 			in.close();
 			fileIn.close();
-			
 		}
 		catch (IOException e) {
 			System.err.println("An error occurred while reading file " + fname);
@@ -227,5 +265,4 @@ public class ToDoList extends Observable implements Serializable, Observer {
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 	}
-	
 }

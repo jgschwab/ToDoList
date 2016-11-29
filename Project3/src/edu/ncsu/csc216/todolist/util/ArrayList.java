@@ -1,5 +1,7 @@
 package edu.ncsu.csc216.todolist.util;
 
+import java.io.Serializable;
+
 import edu.ncsu.csc216.todolist.model.Category;
 
 /**
@@ -7,9 +9,7 @@ import edu.ncsu.csc216.todolist.model.Category;
  * @author Justin Schwab
  *
  */
-public class ArrayList implements List {
-
-	@SuppressWarnings("unused")
+public class ArrayList implements List, Serializable {
 	private static final long serialVersionUID = 28592L;
 	/** The initial size of array. */
 	private static final int INIT_SIZE = 10;

@@ -1,5 +1,7 @@
 package edu.ncsu.csc216.todolist.util;
 
+import java.io.Serializable;
+
 import edu.ncsu.csc216.todolist.model.Task;
 
 /**
@@ -7,8 +9,7 @@ import edu.ncsu.csc216.todolist.model.Task;
  * @author Justin Schwab
  *
  */
-public class LinkedList implements List {
-	@SuppressWarnings("unused")
+public class LinkedList implements List, Serializable {
 	private static final long serialVersionUID = 349987L;
 	private Node head;
 	private int size;

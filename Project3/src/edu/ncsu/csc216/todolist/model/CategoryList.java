@@ -137,6 +137,7 @@ public class CategoryList extends Observable implements Tabular, Serializable, O
 		}
 		Category ret = (Category) list.get(idx);
 		list.remove(idx);
+		ret.deleteObserver(this);
 		setChanged();
 		notifyObservers(this);
 		return ret;
@@ -156,7 +157,8 @@ public class CategoryList extends Observable implements Tabular, Serializable, O
 		if(index < 0 || index > list.size()){
 			return false;
 		}
-		list.remove(index);
+		Category ret = (Category) list.remove(index);
+		ret.deleteObserver(this);
 		setChanged();
 		notifyObservers(this);
 		return true;

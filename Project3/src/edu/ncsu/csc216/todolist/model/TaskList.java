@@ -113,6 +113,7 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 			}
 		}
 		list.add(i, task);
+		task.addObserver(this);
 		setChanged();
 		notifyObservers(this);
 		return true;
@@ -159,22 +160,35 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 	}
 	
 	/**
-	 * Removes the Task at the specified index
+	 * Returns the Task removed from the list at the given index and Observers of TaskList are notified of the change. 
+	 * The TaskList should be removed as an Observer of the removed Task. If the index < 0 or the index >= size(), 
+	 * an IndexOutOfBoundsException is thrown.
 	 * @param idx The index of the Task to remove
 	 * @return The Task that was removed
 	 */
 	public Task removeTaskAt(int idx){
-		return (Task) list.remove(idx);
+		if(idx < 0 || idx >= list.size()){
+			throw new IndexOutOfBoundsException();
+		}
+		Task removed = (Task) list.remove(idx);
+		notifyObservers(removed);
+		removed.deleteObserver(this);
+		return removed;
 	}
 	
 	/**
 	 * Removes the Task with the specified ID 
+	 * Observers of TaskList are notified of the change
+	 * The TaskList should be removed as an Observer of the removed Task
 	 * @param id the ID of the Task to remove
 	 * @return true if the Task was removed
 	 */
 	public boolean removeTask(String id){
 		try{
-			return list.remove(indexOf(id)) != null;
+			Task removed = (Task)list.remove(indexOf(id));
+			notifyObservers(removed);
+			removed.deleteObserver(this);
+			return removed != null;
 		} catch(IndexOutOfBoundsException e){
 			return false;
 		}
@@ -206,6 +220,7 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 	 * The arg parameter is passed to notifyObservers().
 	 */
 	@Override
-	public void update(Observable obs, Object arg){
+	public void update(Observable o, Object arg){
+		
 	}
 }
