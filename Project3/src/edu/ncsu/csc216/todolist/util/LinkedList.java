@@ -97,7 +97,7 @@ public class LinkedList implements List, Serializable {
 		try{
 			add(size, o);
 			return true;
-		} catch(Exception e){
+		} catch(IndexOutOfBoundsException | NullPointerException e){
 			return false;
 		}
 	}
@@ -110,7 +110,7 @@ public class LinkedList implements List, Serializable {
 		if(index < 0 || index > size){
 			throw new IndexOutOfBoundsException();
 		}
-		if(contains(element)){
+		if(this.contains(element)){
 			throw new IllegalArgumentException("Can't add duplicate elements");
 		}
 		

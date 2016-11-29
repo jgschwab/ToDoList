@@ -72,7 +72,7 @@ public class ArrayList implements List, Serializable {
 		try{
 			add(size, item);
 			return true;
-		} catch (Exception e) {
+		} catch (NullPointerException | IndexOutOfBoundsException e) {
 			return false;
 		}
 	}
