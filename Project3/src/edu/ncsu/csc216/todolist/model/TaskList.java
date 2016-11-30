@@ -23,7 +23,7 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 	private int nextTaskNum;
 	/** The ID for this TaskList */
 	private String taskListID;
-	
+
 	/**
 	 * Constructs TaskList; sets nextTaskNum to 1, and sets the fields with the parameter values. 
 	 * The behaviors defined for setName() apply when constructing a TaskList with the given parameters. 
@@ -38,7 +38,7 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 		list = new LinkedList();
 		nextTaskNum = 1;
 	}
-	
+
 	/**
 	 * Gets the name of this TaskList
 	 * @return The name of this TaskList
@@ -46,7 +46,7 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 	public String getName(){
 		return this.name;
 	}
-	
+
 	/**
 	 * If the name parameter is null or the empty string an IllegalArgumentException is thrown. 
 	 * Otherwise, the name field is set and Observers of TaskList are notified of the change.
@@ -60,7 +60,7 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 		setChanged();
 		notifyObservers(this);
 	}
-	
+
 	/**
 	 * Gets this TaskList's ID
 	 * @return This TaskList's taskListID
@@ -68,25 +68,25 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 	public String getTaskListID(){
 		return this.taskListID;
 	}
-	
+
 	private void setTaskListID(String id){
 		if(id == null || id.length() == 0){
 			throw new IllegalArgumentException("Invalid ID");
 		}
 		this.taskListID = id;
 	}
-	
+
 	private int getNextTaskNum(){
 		return nextTaskNum;
 	}
-	
+
 	/**
 	 * Increments the variable for the next Task ID
 	 */
 	private void incNextTaskNum(){
 		nextTaskNum++;
 	}
-	
+
 	/**
 	 * Adds a Task to this TaskList.
 	 * The Task is added to the list so that the list is always sorted by endDateTime. 
@@ -134,7 +134,7 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 		notifyObservers(this);
 		return true;
 	}
-	
+
 	/**
 	 * Gets the Task at the given index
 	 * @param idx The index of the Task to return
@@ -143,7 +143,7 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 	public Task getTaskAt(int idx){
 		return (Task) list.get(idx);
 	}
-	
+
 	/**
 	 * Gets the index of a specified Task
 	 * @param id The ID of the Task to get the index of
@@ -158,7 +158,7 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 		}
 		return -1;
 	}
-	
+
 	/**
 	 * Gets the size of this TaskList
 	 * @return The size of this TaskList
@@ -166,7 +166,7 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 	public int size(){
 		return list.size();
 	}
-	
+
 	/**
 	 * Determines if this TaskList is empty
 	 * @return true if the TaskList is empty
@@ -174,7 +174,7 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 	public boolean isEmpty(){
 		return list.size() == 0;
 	}
-	
+
 	/**
 	 * Returns the Task removed from the list at the given index and Observers of TaskList are notified of the change. 
 	 * The TaskList should be removed as an Observer of the removed Task. If the index < 0 or the index >= size(), 
@@ -192,7 +192,7 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 		removed.deleteObserver(this);
 		return removed;
 	}
-	
+
 	/**
 	 * Removes the Task with the specified ID 
 	 * Observers of TaskList are notified of the change
@@ -205,14 +205,23 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 		if(x == -1){
 			return false;
 		} else{ 
-			Task removed = (Task)list.remove(x);
-			setChanged();
-			notifyObservers(removed);
-			removed.deleteObserver(this);
-			return true;
+			Task removed = null;
+			try{
+				removed = (Task) list.remove(x);
+			} catch (ClassCastException e) {
+				return false;
+			}
+			if(removed != null) {
+				setChanged();
+				notifyObservers(removed);
+				removed.deleteObserver(this);
+				return true;
+			} else {
+				return false;
+			}
 		}
 	}
-	
+
 	/**
 	 * Gets the data of this TaskList as a 2D array
 	 * @return The Tasks in this TaskList and their data
@@ -231,7 +240,7 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 		}
 		return arr;
 	}
-	
+
 	/**
 	 * If a Task in the TaskList changes, the update() method is automatically called. 
 	 * TaskList should propagate the notification of the change to its Observers IF the 
