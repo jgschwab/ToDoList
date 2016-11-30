@@ -188,7 +188,7 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 		}
 		Task removed = (Task) list.remove(idx);
 		setChanged();
-		notifyObservers(removed);
+		notifyObservers(this);
 		removed.deleteObserver(this);
 		return removed;
 	}
@@ -205,20 +205,11 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 		if(x == -1){
 			return false;
 		} else{ 
-			Task removed = null;
-			try{
-				removed = (Task) list.remove(x);
-			} catch (ClassCastException e) {
-				return false;
-			}
-			if(removed != null) {
-				setChanged();
-				notifyObservers(removed);
-				removed.deleteObserver(this);
-				return true;
-			} else {
-				return false;
-			}
+			Task removed = (Task) list.remove(x);
+			setChanged();
+			notifyObservers(this);
+			removed.deleteObserver(this);
+			return true;
 		}
 	}
 
