@@ -107,19 +107,27 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 			return false;
 		}
 		int i = 0;
-		if(list.size() != 0 && task.compareTo((Task)list.get(list.size() - 1)) > 0){ //if element goes at the end
-			list.add(task);
+		if(list.size() != 0 && task.compareTo((Task)list.get(list.size() - 1)) >= 0){ //if element goes at the end
+			try{
+				list.add(task);
+			} catch (IllegalArgumentException e) {
+				return false;
+			}
 			incNextTaskNum();
 			task.addObserver(this);
 			setChanged();
 			notifyObservers(this);
 			return true;
 		} else{
-			while(list.size() != 0 && task.compareTo((Task)list.get(i)) > 0){ //if element goes anywhere else
+			while(list.size() != 0 && task.compareTo((Task)list.get(i)) >= 0){ //if element goes anywhere else
 				i++;
 			}
 		}
-		list.add(i, task);
+		try{
+			list.add(i, task);
+		} catch (IllegalArgumentException e) {
+			return false;
+		}
 		incNextTaskNum();
 		task.addObserver(this);
 		setChanged();
