@@ -1,12 +1,16 @@
 package edu.ncsu.csc216.todolist.ui;
 
+import java.util.Date;
+
 import javax.swing.table.AbstractTableModel;
+
+import edu.ncsu.csc216.todolist.model.Category;
 
 /**
  * TaskTableModel is a wrapper for the information in TaskList that 
  * can be used by a JTable. 
  * @author Justin Schwab
- *
+ * @author Zach Scott
  */
 public class TaskTableModel extends AbstractTableModel {
 	private static final long serialVersionUID =  5954551753060998701L;
@@ -27,8 +31,10 @@ public class TaskTableModel extends AbstractTableModel {
 	 */
 	@Override
 	public int getRowCount(){
-		//TODO implement
-		return -1;
+		if (data == null) {
+			return 0;
+		}
+		return data.length;
 	}
 	
 	/**
@@ -37,8 +43,7 @@ public class TaskTableModel extends AbstractTableModel {
 	 */
 	@Override
 	public int getColumnCount(){
-		//TODO implement
-		return -1;
+		return colNames.length;
 	}
 	
 	/**
@@ -48,19 +53,21 @@ public class TaskTableModel extends AbstractTableModel {
 	 */
 	@Override
 	public String getColumnName(int col){
-		//TODO implement
-		return null;
+		return colNames[col];
 	}
 	
 	@Override
 	public Object getValueAt(int row, int col){
-		//TODO implement
-		return null;
+		if (data == null) {
+			return null;
+		}
+		return data[row][col];
 	}
 	
 	@Override
 	public void setValueAt(Object obj, int row, int col){
-		//TODO implement
+		data[row][col] = obj;
+		fireTableCellUpdated(row, col);
 	}
 	
 	/**
@@ -70,8 +77,9 @@ public class TaskTableModel extends AbstractTableModel {
 	 * @return the TaskData for the given row
 	 */
 	public TaskData getTaskRowData(int row){
-		//TODO implement
-		return null;
+		TaskData ret = new TaskData((String) data[row][0], (String) data[row][1], (Category) data[row][2], (Date) data[row][3], 
+				(Date) data[row][4], (Date) data[row][5], (boolean) data[row][6], (String) data[row][7]);
+		return ret;
 	}
 	
 	/**
@@ -80,6 +88,6 @@ public class TaskTableModel extends AbstractTableModel {
 	 * @param data The data to set at the given index
 	 */
 	public void setTaskRowData(int idx, TaskData data){
-		//TODO implement
+		this.data[idx] = data.getDataArray();
 	}
 }
