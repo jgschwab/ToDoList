@@ -2,12 +2,16 @@ package edu.ncsu.csc216.todolist.ui;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.EventListener;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.*;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentListener;
+
 import edu.ncsu.csc216.todolist.model.CategoryList;
 import edu.ncsu.csc216.todolist.model.Category;
 
@@ -93,7 +97,6 @@ public class TaskEditPane extends JPanel implements Observer {
 		p.add(getTaskDueSpinner());
 		this.add(p);
 		
-		
 		p = new JPanel(new FlowLayout(FlowLayout.LEADING));
 		p.add(new JLabel("Completed Date & Time: ", SwingConstants.LEFT));
 		p.add(getTaskCompletedSpinner());
@@ -113,8 +116,9 @@ public class TaskEditPane extends JPanel implements Observer {
 	 */
 	JSpinner getTaskStartSpinner(){
 		if (null == taskStart) {
-			taskStart = new JSpinner();
+			taskStart = new JSpinner(new SpinnerDateModel());
 			taskStart.setVisible(true);
+			taskStart.setEnabled(false);
 		}
 		return taskStart;
 	}
@@ -125,8 +129,9 @@ public class TaskEditPane extends JPanel implements Observer {
 	 */
 	JSpinner getTaskDueSpinner(){
 		if (null == taskDue) {
-			taskDue = new JSpinner();
+			taskDue = new JSpinner(new SpinnerDateModel());
 			taskDue.setVisible(true);
+			taskDue.setEnabled(false);
 		}
 		return taskDue;
 	}
@@ -137,8 +142,9 @@ public class TaskEditPane extends JPanel implements Observer {
 	 */
 	JSpinner getTaskCompletedSpinner(){
 		if (null == taskCompleted) {
-			taskCompleted = new JSpinner();
+			taskCompleted = new JSpinner(new SpinnerDateModel());
 			taskCompleted.setVisible(true);
+			taskCompleted.setEnabled(false);
 		}
 		return taskCompleted;
 	}
@@ -174,8 +180,8 @@ public class TaskEditPane extends JPanel implements Observer {
 	JTextField getTaskID(){
 		if (null == taskID) {
 			taskID = new JTextField(10);
-			taskID.setEditable(false);
 			taskID.setVisible(true);
+			taskID.setEditable(false);
 			taskID.setHorizontalAlignment(SwingConstants.LEFT);
 		}
 		return taskID;
@@ -192,7 +198,7 @@ public class TaskEditPane extends JPanel implements Observer {
 			taskTitle.setVisible(true);
 			taskTitle.setHorizontalAlignment(SwingConstants.LEFT);
 		}
-		return taskID;
+		return taskTitle;
 	}
 	
 	/**
@@ -202,7 +208,6 @@ public class TaskEditPane extends JPanel implements Observer {
 	JComboBox<Category> getCategory(){
 		if (null == taskCat) {
 			taskCat = new JComboBox<Category>();
-			taskCat.setEditable(false);
 			taskCat.setVisible(true);
 		}
 		return taskCat;
@@ -214,7 +219,7 @@ public class TaskEditPane extends JPanel implements Observer {
 	 */
 	JTextArea getTaskDetails(){
 		if (null == taskDetails) {
-			taskDetails = new JTextArea();
+			taskDetails = new JTextArea(5, 70);
 			taskDetails.setEditable(false);
 			taskDetails.setVisible(true);
 		}
@@ -347,14 +352,39 @@ public class TaskEditPane extends JPanel implements Observer {
 	 * @param e The event listener to add to fields
 	 */
 	void addFieldListener(EventListener e){
-		//TODO implement
+		getTaskID().getDocument().addDocumentListener((DocumentListener) e);
+		getTaskTitle().getDocument().addDocumentListener((DocumentListener) e);
+		getCategory().addActionListener((ActionListener) e);
+		getTaskStartSpinner().getModel().addChangeListener((ChangeListener) e);
+		getTaskDueSpinner().getModel().addChangeListener((ChangeListener) e);
+		getTaskCompletedSpinner().getModel().addChangeListener((ChangeListener) e);
+		getTaskDetails().getDocument().addDocumentListener((DocumentListener) e);
+		getComplete().getModel().addChangeListener((ChangeListener) e);
 	}
 	
 	/**
 	 * Fills the fields with the appropriate text from the TaskData field
 	 */
 	void fillFields(){
-		//TODO implement
+		if(data == null){
+			getTaskID().setText("");
+			getTaskTitle().setText("");
+			getCategory().getModel().setSelectedItem(null);
+			getComplete().setSelected(false);
+			getTaskDetails().setText("");
+		}
+		getTaskID().setText(data.getTaskID());
+		getTaskTitle().setText(data.getTitle());
+		getCategory().getModel().setSelectedItem(data.getCategory());
+		if(data.getStartDateTime() != null)
+			getTaskStartSpinner().setValue(data.getStartDateTime());
+		if(data.getDueDateTime() != null)
+			getTaskDueSpinner().setValue(data.getDueDateTime());
+		if(data.getCompletedDateTime() != null)
+			getTaskCompletedSpinner().setValue(data.getCompletedDateTime());
+		
+		getComplete().setSelected(data.isCompleted());
+		getTaskDetails().setText(data.getDetails());
 	}
 	
 	/**
@@ -370,8 +400,16 @@ public class TaskEditPane extends JPanel implements Observer {
 	 * @return the fields as a TaskData object
 	 */
 	TaskData getFields(){
-		//TODO implement
-		return null;
+		String id = getTaskID().getText();
+		String title = getTaskTitle().getText();
+		String details = getTaskDetails().getText();
+		Category cat = (Category) getCategory().getSelectedItem();
+		Date start = (Date) getTaskStartSpinner().getModel().getValue();
+		Date due = (Date) getTaskDueSpinner().getModel().getValue();
+		Date completed = (Date) getTaskCompletedSpinner().getModel().getValue();
+		boolean isComplete = getComplete().getModel().isSelected();
+		TaskData ret = new TaskData(id, title, cat, start, due, completed, isComplete, details);
+		return ret;
 	}
 	
 	@Override

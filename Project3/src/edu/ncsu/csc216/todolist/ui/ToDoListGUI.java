@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.ncsu.csc216.todolist.ui;
 
 import javax.swing.*;
