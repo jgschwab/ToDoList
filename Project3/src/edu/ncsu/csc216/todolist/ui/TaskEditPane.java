@@ -1,5 +1,7 @@
 package edu.ncsu.csc216.todolist.ui;
 
+import java.awt.Color;
+import java.awt.FlowLayout;
 import java.util.Date;
 import java.util.EventListener;
 import java.util.Observable;
@@ -19,6 +21,7 @@ public class TaskEditPane extends JPanel implements Observer {
 	private CategoryList categories;
 	private JTextField taskID;
 	private JTextField taskTitle;
+	private JTextArea taskDetails;
 	private JComboBox<Category> taskCat;
 	private JSpinner taskStart;
 	private JSpinner taskDue;
@@ -33,7 +36,8 @@ public class TaskEditPane extends JPanel implements Observer {
 	 * @param list The CategoryList to show in this TaskEditPane
 	 */
 	public TaskEditPane(CategoryList list){
-		//TODO implement
+		this(new TaskData(), list);
+		
 	}
 	
 	/**
@@ -42,21 +46,58 @@ public class TaskEditPane extends JPanel implements Observer {
 	 * @param list The CategoryList to show in this TaskEditPane
 	 */
 	public TaskEditPane(TaskData data, CategoryList list){
-		//TODO implement
+		super();
+		this.data = data;
+		add = false;
+		edit = false;
+		init();
 	}
 	
 	/**
 	 * Initializes the GUI.
 	 */
 	private void init(){
-		//TODO implement
+		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+		setBorder(BorderFactory.createLineBorder(Color.black));
+		initView();
+		fillFields();
 	}
 	
 	/**
 	 * Initializes the view.
 	 */
 	private void initView(){
-		//TODO implement
+		JPanel p = new JPanel(new FlowLayout(FlowLayout.LEADING));
+		p.add(new JLabel("Task ID: ", SwingConstants.LEFT));
+		p.add(getTaskID());
+		this.add(p);
+		
+		p = new JPanel(new FlowLayout(FlowLayout.LEADING));
+		p.add(new JLabel("Task Title: ", SwingConstants.LEFT));
+		p.add(getTaskTitle());
+		this.add(p);
+		
+		
+		p = new JPanel(new FlowLayout(FlowLayout.LEADING));
+		p.add(new JLabel("Category: "), SwingConstants.LEFT);
+		p.add(getCategory());
+		this.add(p);
+		
+		p = new JPanel(new FlowLayout(FlowLayout.LEADING));
+		p.add(new JLabel("Start Date & Time: "), SwingConstants.LEFT);
+		p.add(getTaskStartSpinner());
+		this.add(p);
+		
+		p = new JPanel(new FlowLayout(FlowLayout.LEADING));
+		p.add(new JLabel("Due Date & Time: "), SwingConstants.LEFT);
+		p.add(getTaskDueSpinner());
+		this.add(p);
+		
+		
+		p = new JPanel(new FlowLayout(FlowLayout.LEADING));
+		p.add(new JLabel("Task Details: ", SwingConstants.LEFT));
+		p.add(getTaskDetails());
+		this.add(p);
 	}
 	
 	/**
