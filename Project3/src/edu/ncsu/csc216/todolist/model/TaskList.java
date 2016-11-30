@@ -106,6 +106,7 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 		int i = 0;
 		if(list.size() != 0 && task.compareTo((Task)list.get(list.size() - 1)) > 0){ //if element goes at the end
 			list.add(task);
+			task.addObserver(this);
 			setChanged();
 			notifyObservers(this);
 			return true;
