@@ -79,20 +79,27 @@ public class TaskEditPane extends JPanel implements Observer {
 		
 		
 		p = new JPanel(new FlowLayout(FlowLayout.LEADING));
-		p.add(new JLabel("Category: "), SwingConstants.LEFT);
+		p.add(new JLabel("Category: ", SwingConstants.LEFT));
 		p.add(getCategory());
 		this.add(p);
 		
 		p = new JPanel(new FlowLayout(FlowLayout.LEADING));
-		p.add(new JLabel("Start Date & Time: "), SwingConstants.LEFT);
+		p.add(new JLabel("Start Date & Time: ", SwingConstants.LEFT));
 		p.add(getTaskStartSpinner());
 		this.add(p);
 		
 		p = new JPanel(new FlowLayout(FlowLayout.LEADING));
-		p.add(new JLabel("Due Date & Time: "), SwingConstants.LEFT);
+		p.add(new JLabel("Due Date & Time: ", SwingConstants.LEFT));
 		p.add(getTaskDueSpinner());
 		this.add(p);
 		
+		
+		p = new JPanel(new FlowLayout(FlowLayout.LEADING));
+		p.add(new JLabel("Completed Date & Time: ", SwingConstants.LEFT));
+		p.add(getTaskCompletedSpinner());
+		p.add(new JLabel("Completed? ", SwingConstants.LEFT));
+		p.add(getComplete());
+		this.add(p);
 		
 		p = new JPanel(new FlowLayout(FlowLayout.LEADING));
 		p.add(new JLabel("Task Details: ", SwingConstants.LEFT));
@@ -105,8 +112,11 @@ public class TaskEditPane extends JPanel implements Observer {
 	 * @return The Spinner for Task's start date 
 	 */
 	JSpinner getTaskStartSpinner(){
-		//TODO implement
-		return null;
+		if (null == taskStart) {
+			taskStart = new JSpinner();
+			taskStart.setVisible(true);
+		}
+		return taskStart;
 	}
 	
 	/**
@@ -114,8 +124,11 @@ public class TaskEditPane extends JPanel implements Observer {
 	 * @return The Spinner for Task's due date
 	 */
 	JSpinner getTaskDueSpinner(){
-		//TODO implement
-		return null;
+		if (null == taskDue) {
+			taskDue = new JSpinner();
+			taskDue.setVisible(true);
+		}
+		return taskDue;
 	}
 	
 	/**
@@ -123,8 +136,11 @@ public class TaskEditPane extends JPanel implements Observer {
 	 * @return The Spinner for Task's completed date
 	 */
 	JSpinner getTaskCompletedSpinner(){
-		//TODO implement
-		return null;
+		if (null == taskCompleted) {
+			taskCompleted = new JSpinner();
+			taskCompleted.setVisible(true);
+		}
+		return taskCompleted;
 	}
 	
 	/**
@@ -132,8 +148,7 @@ public class TaskEditPane extends JPanel implements Observer {
 	 * @return The displayed Task start date
 	 */
 	Date getTaskStart(){
-		//TODO implement
-		return null;
+		return data.getStartDateTime();
 	}
 	
 	/**
@@ -141,8 +156,7 @@ public class TaskEditPane extends JPanel implements Observer {
 	 * @return The displayed Task's due date
 	 */
 	Date getTaskDue(){
-		//TODO implement
-		return null;
+		return data.getDueDateTime();
 	}
 	
 	/**
@@ -150,8 +164,7 @@ public class TaskEditPane extends JPanel implements Observer {
 	 * @return The displayed Task's completed date
 	 */
 	Date getTaskCompleted(){
-		//TODO implement
-		return null;
+		return data.getCompletedDateTime();
 	}
 	
 	/**
@@ -159,8 +172,13 @@ public class TaskEditPane extends JPanel implements Observer {
 	 * @return The text field for the displayed Task's ID
 	 */
 	JTextField getTaskID(){
-		//TODO implement
-		return null;
+		if (null == taskID) {
+			taskID = new JTextField(10);
+			taskID.setEditable(false);
+			taskID.setVisible(true);
+			taskID.setHorizontalAlignment(SwingConstants.LEFT);
+		}
+		return taskID;
 	}
 	
 	/**
@@ -168,8 +186,13 @@ public class TaskEditPane extends JPanel implements Observer {
 	 * @return The text field for the Task's title
 	 */
 	JTextField getTaskTitle(){
-		//TODO implement
-		return null;
+		if (null == taskTitle) {
+			taskTitle = new JTextField(40);
+			taskTitle.setEditable(false);
+			taskTitle.setVisible(true);
+			taskTitle.setHorizontalAlignment(SwingConstants.LEFT);
+		}
+		return taskID;
 	}
 	
 	/**
@@ -177,8 +200,12 @@ public class TaskEditPane extends JPanel implements Observer {
 	 * @return The combo box of the Task's category
 	 */
 	JComboBox<Category> getCategory(){
-		//TODO implement
-		return null;
+		if (null == taskCat) {
+			taskCat = new JComboBox<Category>();
+			taskCat.setEditable(false);
+			taskCat.setVisible(true);
+		}
+		return taskCat;
 	}
 	
 	/**
@@ -186,17 +213,24 @@ public class TaskEditPane extends JPanel implements Observer {
 	 * @return The text area for the Task's details
 	 */
 	JTextArea getTaskDetails(){
-		//TODO implement
-		return null;
+		if (null == taskDetails) {
+			taskDetails = new JTextArea();
+			taskDetails.setEditable(false);
+			taskDetails.setVisible(true);
+		}
+		return taskDetails;
 	}
 	
 	/**
-	 * Gets the checkbox for whether or not the Task is complete
-	 * @return The checkbox for whether or not the Task is complete
+	 * Gets the check box for whether or not the Task is complete
+	 * @return The check box for whether or not the Task is complete
 	 */
 	JCheckBox getComplete(){
-		//TODO implement
-		return null;
+		if (null == complete) {
+			complete = new JCheckBox();
+			complete.setVisible(true);
+		}
+		return complete;
 	}
 	
 	/**
@@ -204,7 +238,11 @@ public class TaskEditPane extends JPanel implements Observer {
 	 * @param date The date to set this Pane's startDate to
 	 */
 	void setTaskStart(Date date){
-		//TODO implement
+		if(date == null){
+			throw new IllegalArgumentException();
+		}
+		this.data = new TaskData(data.getTaskID(), data.getTitle(), data.getCategory(), date,
+				data.getDueDateTime(), data.getCompletedDateTime(), data.isCompleted(), data.getDetails());
 	}
 	
 	/**
@@ -212,7 +250,11 @@ public class TaskEditPane extends JPanel implements Observer {
 	 * @param date The date to set as the Task's due date
 	 */
 	void setTaskDue(Date date){
-		//TODO implement
+		if(date == null){
+			throw new IllegalArgumentException();
+		}
+		this.data = new TaskData(data.getTaskID(), data.getTitle(), data.getCategory(), data.getStartDateTime(),
+				date, data.getCompletedDateTime(), data.isCompleted(), data.getDetails());
 	}
 	
 	/**
@@ -220,7 +262,11 @@ public class TaskEditPane extends JPanel implements Observer {
 	 * @param date The date when the Task was completed
 	 */
 	void setTaskComplete(Date date){
-		//TODO implement
+		if(date == null){
+			throw new IllegalArgumentException();
+		}
+		this.data = new TaskData(data.getTaskID(), data.getTitle(), data.getCategory(), data.getStartDateTime(),
+				data.getDueDateTime(), date, data.isCompleted(), data.getDetails());
 	}
 	
 	/**
@@ -228,8 +274,7 @@ public class TaskEditPane extends JPanel implements Observer {
 	 * @return true if the pane is in add mode
 	 */
 	boolean isAddMode(){
-		//TODO implement
-		return false;
+		return add;
 	}
 	
 	/**
@@ -237,22 +282,26 @@ public class TaskEditPane extends JPanel implements Observer {
 	 * @return true if the pane is in edit mode
 	 */
 	boolean isEditMode(){
-		//TODO implement
-		return false;
+		return edit;
 	}
 	
 	/**
 	 * enables add mode
 	 */
 	void enableAdd(){
-		//TODO implement
+		if(!add){
+			add = true;
+			edit = false;
+		}
+		clearFields();
 	}
 	
 	/**
 	 * disables add mode
 	 */
 	void disableAdd(){
-		//TODO implement
+		add = false;
+		clearFields();
 	}
 	
 	/**
@@ -260,14 +309,20 @@ public class TaskEditPane extends JPanel implements Observer {
 	 * @param data The TaskData to enable editing
 	 */
 	void enableEdit(TaskData data){
-		//TODO implement
+		if(!edit){
+			edit = true;
+			add = false;
+			this.data = data;
+			fillFields();
+		}
 	}
 	
 	/**
 	 * Disables edit mode
 	 */
 	void disableEdit(){
-		//TODO implement
+		edit = false;
+		clearFields();
 	}
 	
 	/**
@@ -275,8 +330,8 @@ public class TaskEditPane extends JPanel implements Observer {
 	 * @return true if the required fields are not empty
 	 */
 	boolean fieldsNotEmpty(){
-		//TODO implement
-		return false;
+		return getTaskTitle().getDocument().getLength() != 0 && getTaskStartSpinner().getValue() != null &&
+				getTaskDueSpinner().getValue() != null && getCategory().getSelectedItem() != null;
 	}
 	
 	/**
@@ -284,7 +339,7 @@ public class TaskEditPane extends JPanel implements Observer {
 	 * @param data The new TaskData to set
 	 */
 	void setTaskData(TaskData data){
-		//TODO implement
+		this.data = data;
 	}
 	
 	/**
@@ -322,6 +377,5 @@ public class TaskEditPane extends JPanel implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
-		
 	}
 }

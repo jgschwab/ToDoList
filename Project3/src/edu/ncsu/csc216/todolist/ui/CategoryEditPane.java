@@ -239,6 +239,4 @@ class CategoryEditPane extends JPanel {
 	public boolean fieldsNotEmpty() {
 		return getCategoryName().getDocument().getLength() != 0 && getCategoryDesc().getDocument().getLength() != 0;
 	}
-
-	
 }
