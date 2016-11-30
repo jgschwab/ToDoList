@@ -77,9 +77,7 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 	}
 	
 	private int getNextTaskNum(){
-		int num = this.nextTaskNum;
-		incNextTaskNum();
-		return num;
+		return nextTaskNum;
 	}
 	
 	/**
@@ -102,10 +100,16 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 	 */
 	public boolean addTask(String title, String description, Date start, Date due, Category c){
 		String id = taskListID + "-T" + getNextTaskNum();
-		Task task = new Task(title, description, start, due, c, id);
+		Task task = null;
+		try{
+			task = new Task(title, description, start, due, c, id);
+		} catch (IllegalArgumentException e) {
+			return false;
+		}
 		int i = 0;
 		if(list.size() != 0 && task.compareTo((Task)list.get(list.size() - 1)) > 0){ //if element goes at the end
 			list.add(task);
+			incNextTaskNum();
 			task.addObserver(this);
 			setChanged();
 			notifyObservers(this);
@@ -116,6 +120,7 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 			}
 		}
 		list.add(i, task);
+		incNextTaskNum();
 		task.addObserver(this);
 		setChanged();
 		notifyObservers(this);
