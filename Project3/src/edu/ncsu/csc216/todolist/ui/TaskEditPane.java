@@ -2,6 +2,7 @@ package edu.ncsu.csc216.todolist.ui;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.EventListener;
@@ -20,7 +21,7 @@ import edu.ncsu.csc216.todolist.model.Category;
  * @author Justin Schwab
  * @author Zach Scott
  */
-public class TaskEditPane extends JPanel implements Observer {
+public class TaskEditPane extends JPanel implements Observer, ActionListener {
 	/** Id used for serialization */
 	private static final long serialVersionUID = 5479139338455751629L;
 	/** List of categories */
@@ -116,7 +117,9 @@ public class TaskEditPane extends JPanel implements Observer {
 		p.add(new JLabel("Completed Date & Time: ", SwingConstants.LEFT));
 		p.add(getTaskCompletedSpinner());
 		p.add(new JLabel("Completed? ", SwingConstants.LEFT));
-		p.add(getComplete());
+		JCheckBox box = getComplete();
+		box.addActionListener(this);
+		p.add(box);
 		this.add(p);
 
 		p = new JPanel(new FlowLayout(FlowLayout.LEADING));
@@ -317,8 +320,8 @@ public class TaskEditPane extends JPanel implements Observer {
 		if(!add){
 			edit = false;
 			add = true;
+			clearFields();
 		}
-		clearFields();
 	}
 
 	/**
@@ -459,5 +462,14 @@ public class TaskEditPane extends JPanel implements Observer {
 		}
 		TaskEditPane.this.repaint();
 		TaskEditPane.this.validate();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		if(getComplete().getModel().isSelected()){
+			taskCompleted.setEnabled(true);
+		} else {
+			taskCompleted.setEnabled(false);
+		}
 	}
 }
