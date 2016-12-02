@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.EventListener;
 import java.util.Observable;
@@ -21,7 +22,7 @@ import edu.ncsu.csc216.todolist.model.Category;
  * @author Justin Schwab
  * @author Zach Scott
  */
-public class TaskEditPane extends JPanel implements Observer, ActionListener {
+public class TaskEditPane extends JPanel implements Observer, ActionListener, Serializable {
 	/** Id used for serialization */
 	private static final long serialVersionUID = 5479139338455751629L;
 	/** List of categories */

@@ -8,7 +8,7 @@ import java.util.Observable;
  * A representation of a Task in the ToDoList application; 
  * a Task has a Category.
  * @author Justin Schwab
- *
+ * @author Zach Scott
  */
 
 public class Task extends Observable implements Comparable<Object>, Serializable {
@@ -225,11 +225,22 @@ public class Task extends Observable implements Comparable<Object>, Serializable
 		notifyObservers(this);
 	}
 
+	/**
+	 * Compares the Task to another task by comparing their due dates
+	 * @param o the object to be compared with the task
+	 * @return an integer that is positive if this task is due after the other task,
+	 * zero if the two task are due at the same time,
+	 * and negative if the task is due before the other task.
+	 */
 	@Override
 	public int compareTo(Object o) {
 		return this.dueDateTime.compareTo(((Task) o).getDueDateTime());
 	}
 
+	/**
+	 * Generates the hash code for the category
+	 * @return the hash code for the category
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -238,6 +249,11 @@ public class Task extends Observable implements Comparable<Object>, Serializable
 		return result;
 	}
 
+	/**
+	 * Checks for equality between a given object and the category
+	 * @param obj the object to be compared to the category
+	 * @return true if the objects are equal, otherwise false
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

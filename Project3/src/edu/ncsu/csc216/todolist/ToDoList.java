@@ -107,10 +107,16 @@ public class ToDoList extends Observable implements Serializable, Observer {
 		return num;
 	}
 	
+	/**
+	 * Increments the number associated with the next task to be added
+	 */
 	private void incNextTaskListNum(){
 		nextTaskListNum++;
 	}
 	
+	/**
+	 * Increases the size of the array as needed
+	 */
 	private void growArray(){
 		int newSize = tasks.length + RESIZE;
 		TaskList[] temp = new TaskList[newSize];
@@ -263,6 +269,11 @@ public class ToDoList extends Observable implements Serializable, Observer {
 		}
 	}
 
+	/**
+	 * Notifies observers of changes in observable.
+	 * @param o the observed object
+	 * @param arg argument to pass on to observers
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		setChanged(true);

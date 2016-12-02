@@ -1,6 +1,7 @@
 package edu.ncsu.csc216.todolist.ui;
 
 import java.awt.Color;
+import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -13,12 +14,14 @@ import edu.ncsu.csc216.todolist.model.TaskList;
 /**
  * Represents a visual display pane for a Task List
  * @author Justin Schwab
- *
+ * @author Zach Scott
  */
-public class TaskListPane extends JScrollPane implements Observer {
-
+public class TaskListPane extends JScrollPane implements Observer, Serializable {
+	/** Id used for serialization */
 	private static final long serialVersionUID = -2210716111020406799L;
+	/** List of tasks */
 	private TaskList tasks;
+	/** Table used to display the t */
 	private JTable table;
 	private int[] colWidths = {200, 200, 200};
 	private TaskTableModel ttm;

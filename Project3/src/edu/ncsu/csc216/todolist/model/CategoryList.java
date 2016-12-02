@@ -183,7 +183,7 @@ public class CategoryList extends Observable implements Tabular, Serializable, O
 	}
 	
 	/**
-	 * Updates the list if category information is changed
+	 * Notifies Observers of changes in the instance's observables.
 	 * @param o the observed object
 	 * @param arg argument to pass on to observers
 	 */

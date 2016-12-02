@@ -69,6 +69,10 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 		return this.taskListID;
 	}
 
+	/**
+	 * Set the task list's id
+	 * @param id value to be set as the task list's id
+	 */
 	private void setTaskListID(String id){
 		if(id == null || id.length() == 0){
 			throw new IllegalArgumentException("Invalid ID");
@@ -76,6 +80,10 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 		this.taskListID = id;
 	}
 
+	/**
+	 * Gets the next value to be used in the generation of task ids in the list
+	 * @return the next value to be used in the generation of task ids in the list
+	 */
 	private int getNextTaskNum(){
 		return nextTaskNum;
 	}

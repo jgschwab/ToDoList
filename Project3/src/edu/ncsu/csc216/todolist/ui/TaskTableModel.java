@@ -1,5 +1,6 @@
 package edu.ncsu.csc216.todolist.ui;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.swing.table.AbstractTableModel;
@@ -12,7 +13,7 @@ import edu.ncsu.csc216.todolist.model.Category;
  * @author Justin Schwab
  * @author Zach Scott
  */
-public class TaskTableModel extends AbstractTableModel {
+public class TaskTableModel extends AbstractTableModel implements Serializable {
 	private static final long serialVersionUID =  5954551753060998701L;
 	private String[] colNames = {"ID", "Title", "Start Date", "Due Date", "Completed Date", "Complete", "Category"};
 	private Object[][] data;
