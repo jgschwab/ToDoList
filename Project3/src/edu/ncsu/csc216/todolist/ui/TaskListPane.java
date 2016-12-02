@@ -21,9 +21,11 @@ public class TaskListPane extends JScrollPane implements Observer, Serializable 
 	private static final long serialVersionUID = -2210716111020406799L;
 	/** List of tasks */
 	private TaskList tasks;
-	/** Table used to display the t */
+	/** Table used to display the tasks in the list */
 	private JTable table;
+	/** Widths of the columns of the table */
 	private int[] colWidths = {200, 200, 200};
+	/** Model of the Task Table */
 	private TaskTableModel ttm;
 	
 	/**
@@ -80,6 +82,13 @@ public class TaskListPane extends JScrollPane implements Observer, Serializable 
 		table.clearSelection();
 	}
 
+	/**
+	 * This method is called by the observed object, whenever the observed object
+	 * is changed.  In this case, the observed object is the TaskList. Any changes 
+	 * to the TaskList will lead to an update of the TaskTableModel.
+	 * @param o the observable object
+	 * @param arg any additional information needed about the change.
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof TaskList) {

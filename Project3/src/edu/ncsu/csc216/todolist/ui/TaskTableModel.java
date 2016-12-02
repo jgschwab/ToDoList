@@ -14,8 +14,11 @@ import edu.ncsu.csc216.todolist.model.Category;
  * @author Zach Scott
  */
 public class TaskTableModel extends AbstractTableModel implements Serializable {
+	/** Id used for serialization */
 	private static final long serialVersionUID =  5954551753060998701L;
+	/** Names of the columns of the table */
 	private String[] colNames = {"ID", "Title", "Start Date", "Due Date", "Completed Date", "Complete", "Category"};
+	/** Data contained in the table */
 	private Object[][] data;
 	
 	/** 
@@ -57,6 +60,12 @@ public class TaskTableModel extends AbstractTableModel implements Serializable {
 		return colNames[col];
 	}
 	
+	/**
+	 * Gets the value at a specific location on the table.
+	 * @param row The row containing the value
+	 * @param col The column containing the value
+	 * @return the value at the given location
+	 */
 	@Override
 	public Object getValueAt(int row, int col){
 		if (data == null) {
@@ -65,6 +74,12 @@ public class TaskTableModel extends AbstractTableModel implements Serializable {
 		return data[row][col];
 	}
 	
+	/**
+	 * Sets a given value at a specific location on the table.
+	 * @param obj Object to add to the table
+	 * @param row The row to add the value to
+	 * @param col The column to add the value to
+	 */
 	@Override
 	public void setValueAt(Object obj, int row, int col){
 		data[row][col] = obj;
