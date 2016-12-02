@@ -449,12 +449,12 @@ public class TaskEditPane extends JPanel implements Observer, ActionListener {
 
 	/**
 	 * Updates the Pane if the category list has been changed.
-	 * @param arg0 The observable that has been changed
-	 * @param arg1 The message that that the observable send
+	 * @param o The observable that has been changed
+	 * @param arg The message that that the observable send
 	 */
 	@Override
-	public void update(Observable arg0, Object arg1) {
-		if(arg0 instanceof CategoryList) {
+	public void update(Observable o, Object arg) {
+		if(o instanceof CategoryList) {
 			taskCat.removeAllItems();
 			for(int i = 0; i < categories.size(); i++){
 				taskCat.addItem(categories.getCategoryAt(i));
@@ -464,8 +464,13 @@ public class TaskEditPane extends JPanel implements Observer, ActionListener {
 		TaskEditPane.this.validate();
 	}
 
+	/**
+	 * Enables the Completed date Jspinner if the Completed box is checked and disables it if the checkbox
+	 * is deselected
+	 * ActionEvent arg the notification of change in the check box
+	 */
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent arg) {
 		if(getComplete().getModel().isSelected()){
 			taskCompleted.setEnabled(true);
 		} else {
