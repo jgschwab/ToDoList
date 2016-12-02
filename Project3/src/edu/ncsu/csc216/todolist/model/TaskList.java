@@ -230,11 +230,11 @@ public class TaskList extends Observable implements Tabular, Serializable, Obser
 		for(int i = 0; i < list.size(); i++){
 			arr[i][0] = ((Task)list.get(i)).getTaskID();
 			arr[i][1] = ((Task)list.get(i)).getTitle();
-			arr[i][2] = ((Task)list.get(i)).getCategory();
-			arr[i][3] = ((Task)list.get(i)).getStartDateTime();
-			arr[i][4] = ((Task)list.get(i)).getDueDateTime();
-			arr[i][5] = ((Task)list.get(i)).getCompletedDateTime();
-			arr[i][6] = ((Task)list.get(i)).isCompleted();
+			arr[i][2] = ((Task)list.get(i)).getStartDateTime();
+			arr[i][3] = ((Task)list.get(i)).getDueDateTime();
+			arr[i][4] = ((Task)list.get(i)).getCompletedDateTime();
+			arr[i][5] = ((Task)list.get(i)).isCompleted();
+			arr[i][6] = ((Task)list.get(i)).getCategory();
 			arr[i][7] = ((Task)list.get(i)).getDetails();
 		}
 		return arr;

@@ -30,7 +30,7 @@ public class Task extends Observable implements Comparable<Object>, Serializable
 	private boolean completed;
 	/** The unique ID for this Task */
 	private String taskID;
-	
+
 	/**
 	 * Constructs a new Task; throws an IllegalArgumentException if any of the parameters 
 	 * that shouldn't be null or the empty string are null or the empty string.
@@ -139,7 +139,7 @@ public class Task extends Observable implements Comparable<Object>, Serializable
 		setChanged();
 		notifyObservers(this);
 	}
-	
+
 	/**
 	 * Gets the day and time on which this Task was completed
 	 * @return the completedDateTime
@@ -155,9 +155,11 @@ public class Task extends Observable implements Comparable<Object>, Serializable
 	 * @param completedDateTime the completedDateTime to set
 	 */
 	public void setCompletedDateTime(Date completedDateTime) {
-		this.completedDateTime = completedDateTime;
-		setChanged();
-		notifyObservers(this);
+		if(completed){
+			this.completedDateTime = completedDateTime;
+			setChanged();
+			notifyObservers(this);
+		}
 	}
 
 	/**

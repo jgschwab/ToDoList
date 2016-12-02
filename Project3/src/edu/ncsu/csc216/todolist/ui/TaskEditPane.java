@@ -401,6 +401,7 @@ public class TaskEditPane extends JPanel implements Observer, ActionListener, Se
 			taskDetails.setEditable(false);
 			taskStart.setEnabled(false);
 			taskDue.setEnabled(false);
+			taskCompleted.setEnabled(false);
 		} else {
 			getTaskID().setText(data.getTaskID());
 			getTaskTitle().setText(data.getTitle());
