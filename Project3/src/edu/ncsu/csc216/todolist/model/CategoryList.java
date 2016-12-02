@@ -191,7 +191,7 @@ public class CategoryList extends Observable implements Tabular, Serializable, O
 	public void update(Observable o, Object arg) {
 		Category temp = (Category) o;
 		int index = indexOf(temp.getCategoryID());
-		if(index > 0 && index < list.size()){
+		if(index >= 0 && index < list.size()){
 			setChanged();
 			notifyObservers(arg);
 		}
