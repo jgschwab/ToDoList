@@ -155,11 +155,9 @@ public class Task extends Observable implements Comparable<Object>, Serializable
 	 * @param completedDateTime the completedDateTime to set
 	 */
 	public void setCompletedDateTime(Date completedDateTime) {
-		if(completed){
-			this.completedDateTime = completedDateTime;
-			setChanged();
-			notifyObservers(this);
-		}
+		this.completedDateTime = completedDateTime;
+		setChanged();
+		notifyObservers(this);
 	}
 
 	/**
