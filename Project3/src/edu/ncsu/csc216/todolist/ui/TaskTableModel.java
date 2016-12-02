@@ -93,8 +93,8 @@ public class TaskTableModel extends AbstractTableModel implements Serializable {
 	 * @return the TaskData for the given row
 	 */
 	public TaskData getTaskRowData(int row){
-		TaskData ret = new TaskData((String) data[row][0], (String) data[row][1], (Category) data[row][6], (Date) data[row][2], 
-				(Date) data[row][3], (Date) data[row][4], (boolean) data[row][5], (String) data[row][7]);
+		TaskData ret = new TaskData((String) data[row][0], (String) data[row][1], (Category) data[row][2], (Date) data[row][3], 
+				(Date) data[row][4], (Date) data[row][5], (boolean) data[row][6], (String) data[row][7]);
 		return ret;
 	}
 	
