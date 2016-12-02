@@ -26,6 +26,17 @@ public class TaskTableModel extends AbstractTableModel implements Serializable {
 	 * @param data the data to populate the TableModel
 	 */
 	public TaskTableModel(Object[][] data){
+		for(int i = 0; i < data.length; i++){
+			Object temp = data[i][2];
+			for(int j = 2; j < 6; j++){
+				data[i][j] = data[i][j + 1];
+			}
+			data[i][6] = temp;
+			boolean check = (boolean) data[i][5];
+			if(!check){
+				data[i][4] = null;
+			}
+		}
 		this.data = data;
 	}
 	
@@ -93,8 +104,8 @@ public class TaskTableModel extends AbstractTableModel implements Serializable {
 	 * @return the TaskData for the given row
 	 */
 	public TaskData getTaskRowData(int row){
-		TaskData ret = new TaskData((String) data[row][0], (String) data[row][1], (Category) data[row][2], (Date) data[row][3], 
-				(Date) data[row][4], (Date) data[row][5], (boolean) data[row][6], (String) data[row][7]);
+		TaskData ret = new TaskData((String) data[row][0], (String) data[row][1], (Category) data[row][6], (Date) data[row][2], 
+				(Date) data[row][3], (Date) data[row][4], (boolean) data[row][5], (String) data[row][7]);
 		return ret;
 	}
 	

@@ -100,6 +100,17 @@ public class TaskListPane extends JScrollPane implements Observer, Serializable 
 			} else {
 				//Otherwise, just update the values directly.
 				Object[][] arr = tl.get2DArray();
+				for(int i = 0; i < arr.length; i++){
+					Object temp = arr[i][2];
+					for(int j = 2; j < 6; j++){
+						arr[i][j] = arr[i][j + 1];
+					}
+					arr[i][6] = temp;
+					boolean check = (boolean) arr[i][5];
+					if(!check){
+						arr[i][4] = null;
+					}
+				}
 				for (int i = 0; i < arr.length; i++) {
 					for (int j = 0; j < ttm.getColumnCount(); j++) {
 						ttm.setValueAt(arr[i][j], i, j);
